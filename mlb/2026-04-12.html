@@ -1,0 +1,3919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Stat Drop - MLB 2026-04-12</title>
+  <meta name="description" content="MLB daily analytics for 2026-04-12 - power rankings, signals, pitching and batting leaderboards">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Surfaces */
+  --parchment:    #f5f4ed;
+  --ivory:        #faf9f5;
+  --warm-sand:    #e8e6dc;
+  --deep-dark:    #141413;
+  --dark-surface: #30302e;
+
+  /* Text */
+  --text-primary:   #141413;
+  --text-secondary: #5e5d59;
+  --text-tertiary:  #87867f;
+  --text-dark-warm: #3d3d3a;
+  --text-on-dark:   #faf9f5;
+  --text-silver:    #b0aea5;
+  --charcoal-warm:  #4d4c48;
+
+  /* Brand */
+  --terracotta:   #c96442;
+  --coral:        #d97757;
+
+  /* Borders */
+  --border-cream: #f0eee6;
+  --border-warm:  #e8e6dc;
+  --border-dark:  #30302e;
+
+  /* Ring shadows */
+  --ring-warm:  #d1cfc5;
+  --ring-deep:  #c2c0b6;
+
+  /* Semantic */
+  --positive:   #3d7a56;
+  --negative:   #b53333;
+  --warning:    #8a6820;
+  --focus-blue: #3898ec;
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:  'SF Mono', 'Fira Code', monospace;
+}
+
+html { font-size: 14px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--parchment);
+  color: var(--text-primary);
+  line-height: 1.60;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Header (dark section) ────────────────────────────── */
+.header {
+  background: var(--deep-dark);
+  padding: 28px 0 24px;
+  border-bottom: 1px solid var(--border-dark);
+}
+.header-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+
+.brand { display: flex; align-items: baseline; gap: 16px; }
+.brand h1 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 1.10;
+  color: var(--text-on-dark);
+  letter-spacing: -0.01em;
+}
+.sport-pill {
+  font-family: var(--font-sans);
+  font-size: 0.64rem; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 3px 10px;
+  background: rgba(201,100,66,0.18);
+  color: var(--coral);
+  border: 1px solid rgba(201,100,66,0.30);
+  border-radius: 20px;
+}
+
+.header-meta {
+  display: flex; align-items: center; gap: 24px;
+  font-size: 0.82rem; color: var(--text-silver);
+}
+.header-meta .dot {
+  width: 6px; height: 6px; background: #4a8f6a; border-radius: 50%;
+  display: inline-block; margin-right: 6px;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+.subscribe-bar { display: flex; gap: 8px; }
+.subscribe-bar input {
+  font-family: var(--font-sans); font-size: 0.82rem;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border-dark);
+  border-radius: 12px;
+  color: var(--text-on-dark);
+  outline: none; width: 200px;
+  transition: border-color 0.15s;
+}
+.subscribe-bar input::placeholder { color: var(--text-silver); }
+.subscribe-bar input:focus { border-color: var(--focus-blue); }
+.subscribe-bar button {
+  font-family: var(--font-sans); font-size: 0.82rem; font-weight: 500;
+  padding: 8px 20px;
+  background: var(--terracotta);
+  color: var(--ivory);
+  border: none; border-radius: 8px; cursor: pointer;
+  box-shadow: var(--terracotta) 0px 0px 0px 0px, var(--terracotta) 0px 0px 0px 1px;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.subscribe-bar button:hover {
+  background: var(--coral);
+  box-shadow: var(--coral) 0px 0px 0px 0px, var(--ring-deep) 0px 0px 0px 2px;
+}
+
+/* ── Tab Nav (parchment band) ─────────────────────────── */
+.tab-nav {
+  background: var(--parchment);
+  border-bottom: 1px solid var(--border-warm);
+  overflow-x: auto;
+}
+.tab-nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 32px;
+  display: flex; gap: 0;
+}
+.tab-nav button {
+  font-family: var(--font-sans); font-size: 0.84rem; font-weight: 500;
+  padding: 14px 20px;
+  background: none; color: var(--text-secondary);
+  border: none; border-bottom: 2px solid transparent;
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.tab-nav button:hover { color: var(--text-primary); }
+.tab-nav button.active {
+  color: var(--terracotta);
+  border-bottom-color: var(--terracotta);
+  font-weight: 600;
+}
+
+/* ── Content shell ────────────────────────────────────── */
+.shell {
+  max-width: 1200px; margin: 0 auto;
+  padding: 32px 32px 80px;
+}
+
+/* ── Sections ─────────────────────────────────────────── */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── Cards ────────────────────────────────────────────── */
+.card {
+  background: var(--ivory);
+  border: 1px solid var(--border-cream);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: rgba(0,0,0,0.04) 0px 2px 16px;
+}
+.card-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem; font-weight: 500;
+  line-height: 1.20;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.badge {
+  font-family: var(--font-sans);
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12px;
+  padding: 2px 10px;
+  background: var(--warm-sand);
+  color: var(--charcoal-warm);
+  border-radius: 20px;
+}
+.badge-green {
+  background: rgba(61,122,86,0.12);
+  color: var(--positive);
+}
+.badge-red {
+  background: rgba(181,51,51,0.10);
+  color: var(--negative);
+}
+
+/* ── Grids ────────────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 960px)  { .grid-2 { grid-template-columns: 1fr; } }
+@media (max-width: 800px)  { .grid-3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px)  { .grid-3 { grid-template-columns: 1fr; } }
+
+/* ── KPI Row ──────────────────────────────────────────── */
+.kpi-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-bottom: 24px;
+}
+.kpi {
+  background: var(--ivory);
+  border: 1px solid var(--border-cream);
+  border-radius: 8px; padding: 20px 24px;
+  text-align: center;
+  box-shadow: rgba(0,0,0,0.03) 0px 2px 12px;
+}
+.kpi-value {
+  font-family: var(--font-serif);
+  font-size: 2rem; font-weight: 500;
+  line-height: 1.10;
+  color: var(--text-primary);
+}
+.kpi-value.accent { color: var(--terracotta); }
+.kpi-label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--text-tertiary); margin-top: 6px;
+}
+@media (max-width: 700px) { .kpi-row { grid-template-columns: 1fr 1fr; } }
+
+/* ── Tables ───────────────────────────────────────────── */
+table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+thead th {
+  font-family: var(--font-sans);
+  font-size: 0.64rem; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-warm);
+  text-align: left; white-space: nowrap;
+}
+thead th.r { text-align: right; }
+thead th.c { text-align: center; }
+tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-cream);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--warm-sand); }
+td.r { text-align: right; }
+td.c { text-align: center; }
+td.team {
+  font-family: var(--font-sans);
+  font-weight: 600; letter-spacing: 0.3px;
+  color: var(--text-primary);
+}
+td.player { font-weight: 500; }
+.pos { color: var(--positive); font-weight: 500; }
+.neg { color: var(--negative); }
+.w   { color: var(--positive); font-weight: 600; }
+.l   { color: var(--negative); font-weight: 600; }
+tr.hot td { background: rgba(61,122,86,0.06); }
+tr.cold td { background: rgba(181,51,51,0.05); }
+.table-wrap { overflow-x: auto; }
+
+/* ── Power Rankings ───────────────────────────────────── */
+.power-row {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-cream);
+}
+.power-row:last-child { border-bottom: none; }
+.tier {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+  font-family: var(--font-sans); font-weight: 600; font-size: 0.9rem;
+  box-shadow: var(--ring-warm) 0px 0px 0px 0px, var(--ring-warm) 0px 0px 0px 1px;
+}
+.tier-s { background: #2d5a3d; color: #d4edd9; }
+.tier-a { background: var(--terracotta); color: var(--ivory); }
+.tier-b { background: #5c4a1e; color: #e8d9b0; }
+.tier-c { background: var(--charcoal-warm); color: var(--warm-sand); }
+.tier-d { background: #7a3a2a; color: #f0cfc4; }
+.tier-f { background: var(--negative); color: var(--ivory); }
+.power-teams {
+  font-family: var(--font-sans); font-weight: 600;
+  font-size: 0.88rem; color: var(--text-primary); line-height: 1.5;
+}
+.power-reason {
+  font-size: 0.80rem; color: var(--text-secondary); line-height: 1.55; margin-top: 2px;
+}
+
+/* ── Luck Watch ───────────────────────────────────────── */
+.luck-hot {
+  border-left: 3px solid var(--terracotta);
+  box-shadow: inset 4px 0 16px -6px rgba(201,100,66,0.12), rgba(0,0,0,0.04) 0px 2px 16px;
+}
+.luck-cold {
+  border-left: 3px solid #4a6fa5;
+  box-shadow: inset 4px 0 16px -6px rgba(74,111,165,0.10), rgba(0,0,0,0.04) 0px 2px 16px;
+}
+
+/* ── Signals ──────────────────────────────────────────── */
+.signal-card {
+  background: var(--ivory);
+  border: 1px solid var(--border-cream);
+  border-radius: 8px; padding: 16px 18px;
+  box-shadow: rgba(0,0,0,0.03) 0px 1px 8px;
+}
+.signal-title {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 6px; font-size: 0.86rem; font-weight: 600;
+  color: var(--text-primary);
+}
+.signal-tag {
+  font-family: var(--font-sans);
+  font-size: 0.60rem; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 4px;
+}
+.tag-back    { background: rgba(61,122,86,0.12);  color: var(--positive); }
+.tag-fade    { background: rgba(181,51,51,0.10);  color: var(--negative); }
+.tag-regress { background: rgba(138,104,32,0.12); color: var(--warning);  }
+.signal-body { font-size: 0.80rem; color: var(--text-secondary); line-height: 1.55; }
+
+/* ── Pitcher Profile Tags ─────────────────────────────── */
+.ptag {
+  font-family: var(--font-sans);
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.3px; padding: 2px 8px; border-radius: 4px;
+}
+.ptag-gb  { background: rgba(61,122,86,0.12);  color: var(--positive); }
+.ptag-fb  { background: rgba(181,51,51,0.10);  color: var(--negative); }
+.ptag-neu { background: var(--warm-sand);       color: var(--charcoal-warm); }
+
+/* ── Park Factor Heatmap ──────────────────────────────── */
+.heat-5 { color: var(--negative);   font-weight: 600; }
+.heat-4 { color: #a05c2a; }
+.heat-3 { color: var(--warning); }
+.heat-2 { color: #4a6fa5; }
+.heat-1 { color: var(--positive); font-weight: 600; }
+
+/* ── Division / League Labels ─────────────────────────── */
+.division-label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 24px 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-warm);
+}
+.division-label:first-child { margin-top: 0; }
+.league-label {
+  font-family: var(--font-serif);
+  font-size: 1.05rem; font-weight: 500;
+  color: var(--text-primary); margin-bottom: 4px;
+}
+
+/* ── Footer (dark section) ────────────────────────────── */
+.footer {
+  background: var(--deep-dark);
+  margin: 80px -32px -80px;
+  padding: 28px 32px;
+  font-size: 0.75rem; color: var(--text-silver);
+  text-align: center; line-height: 1.60;
+}
+
+/* ── Scrollbar ────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--parchment); }
+::-webkit-scrollbar-thumb { background: var(--border-warm); border-radius: 3px; }
+
+/* ── Tooltips ─────────────────────────────────────────── */
+[data-tip] { cursor: help; }
+.tip-box {
+  position: fixed;
+  background: var(--deep-dark);
+  color: var(--ivory);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.5;
+  padding: 6px 10px;
+  border-radius: 6px;
+  max-width: 240px;
+  white-space: normal;
+  text-align: center;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: rgba(0,0,0,0.22) 0px 4px 14px;
+  border: 1px solid var(--border-dark);
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <h1>The Stat Drop</h1>
+      <span class="sport-pill">MLB</span>
+    </div>
+    <div class="header-meta">
+  <span><span class="dot"></span> Season Day 19</span>
+  <span>Data Through: 2026-04-12</span>
+  <span>188 Games Played</span>
+    </div>
+    <div class="subscribe-bar">
+      <input type="email" placeholder="your@email.com">
+      <button>Subscribe</button>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="active" onclick="showSection('overview', this)">Overview</button>
+    <button onclick="showSection('standings', this)">Standings</button>
+    <button onclick="showSection('pitching', this)">Pitching</button>
+    <button onclick="showSection('batting', this)">Batting</button>
+    <button onclick="showSection('ballparks', this)">Ballparks</button>
+    <button onclick="showSection('yesterday', this)">Yesterday</button>
+  </div>
+</nav>
+
+<div class="shell">
+
+<div id="overview" class="section active">
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-value">19</div>
+      <div class="kpi-label">Season Day</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">188</div>
+      <div class="kpi-label">Games Played</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value green">0.232</div>
+      <div class="kpi-label">League AVG</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">4.27</div>
+      <div class="kpi-label">Avg Runs/Game</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Power Rankings <span class="badge">Updated 2026-04-12</span></div>
+    <div class="power-row">
+      <span class="tier tier-s">S</span>
+      <div>
+        <div class="power-teams">ATL · NYY · LAD</div>
+        <div class="power-reason">Avg .762 Pyth W%. LAD +34 run diff. NYY, LAD trending up. ATL regression watch.</div>
+      </div>
+    </div>
+    <div class="power-row">
+      <span class="tier tier-a">A</span>
+      <div>
+        <div class="power-teams">MIL · CHC · MIA · TEX · MIN</div>
+        <div class="power-reason">Avg .596 Pyth W%. MIL +24 run diff. TEX, MIN trending up. CHC regression watch.</div>
+      </div>
+    </div>
+    <div class="power-row">
+      <span class="tier tier-b">B</span>
+      <div>
+        <div class="power-teams">NYM · PIT · COL · CLE · SD · BAL</div>
+        <div class="power-reason">Avg .529 Pyth W%, +3 avg run diff. BAL trending up.</div>
+      </div>
+    </div>
+    <div class="power-row">
+      <span class="tier tier-c">C</span>
+      <div>
+        <div class="power-teams">HOU · STL · AZ · LAA</div>
+        <div class="power-reason">Avg .462 Pyth W%, -4 avg run diff. HOU trending down. STL regression watch.</div>
+      </div>
+    </div>
+    <div class="power-row">
+      <span class="tier tier-d">D</span>
+      <div>
+        <div class="power-teams">SEA · DET · WSH · CIN · BOS · TB · OAK · PHI · SF</div>
+        <div class="power-reason">Avg .414 Pyth W%. SF -16 run diff. SEA, DET, WSH, CIN trending down. SEA, DET, WSH, CIN, PHI regression watch.</div>
+      </div>
+    </div>
+    <div class="power-row">
+      <span class="tier tier-f">F</span>
+      <div>
+        <div class="power-teams">KC · TOR · CWS</div>
+        <div class="power-reason">Avg .327 Pyth W%. CWS -27 run diff. KC trending down. TOR regression watch.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card luck-hot">
+      <div class="card-title">Running Hot <span class="badge-red" data-tip="BABIP well above .300 — this player may be getting lucky on balls in play and is a regression candidate">High BABIP</span></div>
+      <table>
+        <thead><tr>
+          <th>Player</th>
+          <th>Team</th>
+          <th class="r" data-tip="Batting Average on Balls In Play. Excludes HRs and strikeouts. League average ~.300. High BABIP often indicates luck.">BABIP</th>
+          <th class="r" data-tip="Batting average (hits ÷ at-bats)">AVG</th>
+          <th class="r" data-tip="On-base Plus Slugging — OBP + SLG. Best single measure of offensive production.">OPS</th>
+          <th class="r" data-tip="At-bats">AB</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td class="player">Connor Wong</td>
+          <td class="team">BOS</td>
+          <td class="r neg">0.625</td>
+          <td class="r">0.417</td>
+          <td class="r">1.129</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td class="player">Joey Wiemer</td>
+          <td class="team">WSH</td>
+          <td class="r neg">0.600</td>
+          <td class="r">0.440</td>
+          <td class="r">1.293</td>
+          <td class="r">25</td>
+        </tr>
+        <tr>
+          <td class="player">Garrett Mitchell</td>
+          <td class="team">MIL</td>
+          <td class="r neg">0.571</td>
+          <td class="r">0.310</td>
+          <td class="r">0.946</td>
+          <td class="r">29</td>
+        </tr>
+        <tr>
+          <td class="player">Andy Pages</td>
+          <td class="team">LAD</td>
+          <td class="r neg">0.533</td>
+          <td class="r">0.413</td>
+          <td class="r">1.112</td>
+          <td class="r">46</td>
+        </tr>
+        <tr>
+          <td class="player">Christian Yelich</td>
+          <td class="team">MIL</td>
+          <td class="r neg">0.500</td>
+          <td class="r">0.372</td>
+          <td class="r">0.948</td>
+          <td class="r">43</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card luck-cold">
+      <div class="card-title">Running Cold <span class="badge" style="background:rgba(6,182,212,0.15);color:var(--cyan)" data-tip="BABIP well below .300 — this player may be unlucky on contact and could be due for a positive correction">Low BABIP</span></div>
+      <table>
+        <thead><tr>
+          <th>Player</th>
+          <th>Team</th>
+          <th class="r" data-tip="Batting Average on Balls In Play. Excludes HRs and strikeouts. League average ~.300. Low BABIP often indicates bad luck.">BABIP</th>
+          <th class="r" data-tip="Batting average (hits ÷ at-bats)">AVG</th>
+          <th class="r" data-tip="On-base Plus Slugging — OBP + SLG. Best single measure of offensive production.">OPS</th>
+          <th class="r" data-tip="At-bats">AB</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td class="player">Addison Barger</td>
+          <td class="team">TOR</td>
+          <td class="r" style="color:var(--cyan)">0.071</td>
+          <td class="r">0.053</td>
+          <td class="r">0.279</td>
+          <td class="r">19</td>
+        </tr>
+        <tr>
+          <td class="player">Marcell Ozuna</td>
+          <td class="team">PIT</td>
+          <td class="r" style="color:var(--cyan)">0.087</td>
+          <td class="r">0.065</td>
+          <td class="r">0.236</td>
+          <td class="r">31</td>
+        </tr>
+        <tr>
+          <td class="player">Joc Pederson</td>
+          <td class="team">TEX</td>
+          <td class="r" style="color:var(--cyan)">0.100</td>
+          <td class="r">0.120</td>
+          <td class="r">0.487</td>
+          <td class="r">25</td>
+        </tr>
+        <tr>
+          <td class="player">Jordan Beck</td>
+          <td class="team">COL</td>
+          <td class="r" style="color:var(--cyan)">0.105</td>
+          <td class="r">0.080</td>
+          <td class="r">0.268</td>
+          <td class="r">25</td>
+        </tr>
+        <tr>
+          <td class="player">Ke&#39;Bryan Hayes</td>
+          <td class="team">CIN</td>
+          <td class="r" style="color:var(--cyan)">0.107</td>
+          <td class="r">0.097</td>
+          <td class="r">0.249</td>
+          <td class="r">31</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Team Offense <span class="badge">Top 10</span></div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th class="r" data-tip="Team batting average">AVG</th>
+            <th class="r" data-tip="Runs scored per game">RPG</th>
+            <th class="r" data-tip="Home runs per game">HR/G</th>
+            <th class="r" data-tip="Strikeouts per game (as a batter)">K/G</th>
+            <th class="r" data-tip="Walks drawn per game">BB/G</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="team">LAD</td>
+            <td class="r">0.285</td>
+            <td class="r pos">6.25</td>
+            <td class="r">1.75</td>
+            <td class="r">8.5</td>
+            <td class="r">3.83</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="team">HOU</td>
+            <td class="r">0.271</td>
+            <td class="r pos">6.08</td>
+            <td class="r">1.23</td>
+            <td class="r">7.77</td>
+            <td class="r">5.15</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td class="team">WSH</td>
+            <td class="r">0.266</td>
+            <td class="r pos">5.92</td>
+            <td class="r">1.33</td>
+            <td class="r">8.25</td>
+            <td class="r">3.67</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td class="team">MIL</td>
+            <td class="r">0.253</td>
+            <td class="r ">5.83</td>
+            <td class="r">0.83</td>
+            <td class="r">9.0</td>
+            <td class="r">5.17</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td class="team">MIA</td>
+            <td class="r">0.269</td>
+            <td class="r ">5.15</td>
+            <td class="r">0.77</td>
+            <td class="r">7.31</td>
+            <td class="r">3.38</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td class="team">ATL</td>
+            <td class="r">0.249</td>
+            <td class="r ">4.92</td>
+            <td class="r">1.31</td>
+            <td class="r">7.62</td>
+            <td class="r">3.54</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td class="team">STL</td>
+            <td class="r">0.226</td>
+            <td class="r ">4.92</td>
+            <td class="r">1.08</td>
+            <td class="r">8.25</td>
+            <td class="r">4.42</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td class="team">CHC</td>
+            <td class="r">0.220</td>
+            <td class="r ">4.67</td>
+            <td class="r">1.08</td>
+            <td class="r">8.5</td>
+            <td class="r">4.25</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td class="team">MIN</td>
+            <td class="r">0.226</td>
+            <td class="r ">4.62</td>
+            <td class="r">0.85</td>
+            <td class="r">9.54</td>
+            <td class="r">4.69</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td class="team">TB</td>
+            <td class="r">0.253</td>
+            <td class="r ">4.58</td>
+            <td class="r">0.92</td>
+            <td class="r">7.17</td>
+            <td class="r">3.25</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Team Pitching <span class="badge">Top 10</span></div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th class="r" data-tip="Runs allowed per game">RA/G</th>
+            <th class="r" data-tip="Strikeouts per game (as a pitcher)">K/G</th>
+            <th class="r" data-tip="Walks issued per game">BB/G</th>
+            <th class="r" data-tip="Walks + Hits per Inning Pitched — measures baserunner allowance">WHIP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="team">NYY</td>
+            <td class="r pos">2.42</td>
+            <td class="r">9.5</td>
+            <td class="r">2.42</td>
+            <td class="r">1.034</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="team">ATL</td>
+            <td class="r pos">2.46</td>
+            <td class="r">8.08</td>
+            <td class="r">2.31</td>
+            <td class="r">0.904</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td class="team">SEA</td>
+            <td class="r pos">3.23</td>
+            <td class="r">9.15</td>
+            <td class="r">2.0</td>
+            <td class="r">0.943</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td class="team">TEX</td>
+            <td class="r ">3.25</td>
+            <td class="r">9.92</td>
+            <td class="r">2.58</td>
+            <td class="r">1.084</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td class="team">CLE</td>
+            <td class="r ">3.31</td>
+            <td class="r">10.85</td>
+            <td class="r">3.85</td>
+            <td class="r">1.148</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td class="team">LAD</td>
+            <td class="r ">3.42</td>
+            <td class="r">7.75</td>
+            <td class="r">3.33</td>
+            <td class="r">1.131</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td class="team">CHC</td>
+            <td class="r ">3.67</td>
+            <td class="r">7.67</td>
+            <td class="r">3.25</td>
+            <td class="r">1.124</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td class="team">CIN</td>
+            <td class="r ">3.69</td>
+            <td class="r">8.62</td>
+            <td class="r">4.0</td>
+            <td class="r">1.288</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td class="team">NYM</td>
+            <td class="r ">3.77</td>
+            <td class="r">9.15</td>
+            <td class="r">3.38</td>
+            <td class="r">1.202</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td class="team">MIL</td>
+            <td class="r ">3.83</td>
+            <td class="r">10.33</td>
+            <td class="r">4.5</td>
+            <td class="r">1.333</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Best Defense <span class="badge-green">Fewest Errors</span></div>
+      <table>
+        <thead><tr>
+          <th>Team</th>
+          <th class="r" data-tip="Total errors committed">E</th>
+          <th class="r" data-tip="Errors per game">E/G</th>
+          <th class="r" data-tip="Assists per game — proxy for defensive range and activity">A/G</th>
+          <th class="r" data-tip="Games played">GP</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td class="team">MIL</td>
+          <td class="r">2</td>
+          <td class="r pos">0.17</td>
+          <td class="r">7.83</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td class="team">CLE</td>
+          <td class="r">3</td>
+          <td class="r pos">0.23</td>
+          <td class="r">6.46</td>
+          <td class="r">13</td>
+        </tr>
+        <tr>
+          <td class="team">LAD</td>
+          <td class="r">3</td>
+          <td class="r pos">0.25</td>
+          <td class="r">8.42</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td class="team">HOU</td>
+          <td class="r">4</td>
+          <td class="r pos">0.31</td>
+          <td class="r">7.31</td>
+          <td class="r">13</td>
+        </tr>
+        <tr>
+          <td class="team">CHC</td>
+          <td class="r">4</td>
+          <td class="r pos">0.33</td>
+          <td class="r">9.33</td>
+          <td class="r">12</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Worst Defense <span class="badge-red">Most Errors</span></div>
+      <table>
+        <thead><tr>
+          <th>Team</th>
+          <th class="r" data-tip="Total errors committed">E</th>
+          <th class="r" data-tip="Errors per game">E/G</th>
+          <th class="r" data-tip="Assists per game — proxy for defensive range and activity">A/G</th>
+          <th class="r" data-tip="Games played">GP</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td class="team">TB</td>
+          <td class="r">17</td>
+          <td class="r neg">1.42</td>
+          <td class="r">7.42</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td class="team">WSH</td>
+          <td class="r">12</td>
+          <td class="r neg">1.0</td>
+          <td class="r">9.0</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td class="team">BOS</td>
+          <td class="r">12</td>
+          <td class="r neg">1.0</td>
+          <td class="r">9.17</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td class="team">MIA</td>
+          <td class="r">12</td>
+          <td class="r neg">0.92</td>
+          <td class="r">7.38</td>
+          <td class="r">13</td>
+        </tr>
+        <tr>
+          <td class="team">TOR</td>
+          <td class="r">10</td>
+          <td class="r neg">0.83</td>
+          <td class="r">7.58</td>
+          <td class="r">12</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div id="standings" class="section">
+
+  <div class="card">
+    <div class="league-label">American League</div>
+    <div class="division-label">American League East</div>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th class="r" data-tip="Wins">W</th>
+      <th class="r" data-tip="Losses">L</th>
+      <th class="r" data-tip="Win percentage (wins ÷ total games)">PCT</th>
+      <th class="r" data-tip="Games behind the division leader">GB</th>
+      <th class="c" data-tip="Home record (W-L)">Home</th>
+      <th class="c" data-tip="Away record (W-L)">Away</th>
+      <th class="r" data-tip="Runs scored">RS</th>
+      <th class="r" data-tip="Runs allowed">RA</th>
+      <th class="r" data-tip="Run differential — runs scored minus runs allowed">Diff</th>
+      <th class="r" data-tip="Pythagorean Win %. Expected record based on runs scored vs. allowed. RS^1.83 ÷ (RS^1.83 + RA^1.83). Used for power ranking tiers.">PythW%</th>
+      <th class="r" data-tip="Pythagorean Win % over the last 12 games only — shows current form. Green = trending above season average; red = trending below.">L12 PythW%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="team">NYY</td>
+      <td class="r">8</td>
+      <td class="r">4</td>
+      <td class="r">0.667</td>
+      <td class="r">0.0</td>
+      <td class="c">3-3</td>
+      <td class="c">5-1</td>
+      <td class="r">54</td>
+      <td class="r">29</td>
+      <td class="r pos">+25</td>
+      <td class="r">0.757</td>
+      <td class="r ">0.757</td>
+    </tr>
+    <tr>
+      <td class="team">BAL</td>
+      <td class="r">6</td>
+      <td class="r">6</td>
+      <td class="r">0.500</td>
+      <td class="r">2.0</td>
+      <td class="c">3-3</td>
+      <td class="c">3-3</td>
+      <td class="r">45</td>
+      <td class="r">49</td>
+      <td class="r neg">-4</td>
+      <td class="r">0.461</td>
+      <td class="r ">0.461</td>
+    </tr>
+    <tr>
+      <td class="team">TB</td>
+      <td class="r">5</td>
+      <td class="r">7</td>
+      <td class="r">0.417</td>
+      <td class="r">3.0</td>
+      <td class="c">1-2</td>
+      <td class="c">4-5</td>
+      <td class="r">55</td>
+      <td class="r">69</td>
+      <td class="r neg">-14</td>
+      <td class="r">0.398</td>
+      <td class="r ">0.398</td>
+    </tr>
+    <tr>
+      <td class="team">TOR</td>
+      <td class="r">5</td>
+      <td class="r">7</td>
+      <td class="r">0.417</td>
+      <td class="r">3.0</td>
+      <td class="c">5-4</td>
+      <td class="c">0-3</td>
+      <td class="r">41</td>
+      <td class="r">63</td>
+      <td class="r neg">-22</td>
+      <td class="r">0.313</td>
+      <td class="r ">0.313</td>
+    </tr>
+    <tr>
+      <td class="team">BOS</td>
+      <td class="r">4</td>
+      <td class="r">8</td>
+      <td class="r">0.333</td>
+      <td class="r">4.0</td>
+      <td class="c">3-3</td>
+      <td class="c">1-5</td>
+      <td class="r">44</td>
+      <td class="r">55</td>
+      <td class="r neg">-11</td>
+      <td class="r">0.399</td>
+      <td class="r ">0.399</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+    <div class="division-label">American League Central</div>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th class="r" data-tip="Wins">W</th>
+      <th class="r" data-tip="Losses">L</th>
+      <th class="r" data-tip="Win percentage (wins ÷ total games)">PCT</th>
+      <th class="r" data-tip="Games behind the division leader">GB</th>
+      <th class="c" data-tip="Home record (W-L)">Home</th>
+      <th class="c" data-tip="Away record (W-L)">Away</th>
+      <th class="r" data-tip="Runs scored">RS</th>
+      <th class="r" data-tip="Runs allowed">RA</th>
+      <th class="r" data-tip="Run differential — runs scored minus runs allowed">Diff</th>
+      <th class="r" data-tip="Pythagorean Win %. Expected record based on runs scored vs. allowed. RS^1.83 ÷ (RS^1.83 + RA^1.83). Used for power ranking tiers.">PythW%</th>
+      <th class="r" data-tip="Pythagorean Win % over the last 12 games only — shows current form. Green = trending above season average; red = trending below.">L12 PythW%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="team">CLE</td>
+      <td class="r">8</td>
+      <td class="r">5</td>
+      <td class="r">0.615</td>
+      <td class="r">0.0</td>
+      <td class="c">4-2</td>
+      <td class="c">4-3</td>
+      <td class="r">46</td>
+      <td class="r">43</td>
+      <td class="r pos">+3</td>
+      <td class="r">0.531</td>
+      <td class="r neg">0.512</td>
+    </tr>
+    <tr>
+      <td class="team">MIN</td>
+      <td class="r">7</td>
+      <td class="r">6</td>
+      <td class="r">0.538</td>
+      <td class="r">1.0</td>
+      <td class="c">5-2</td>
+      <td class="c">2-4</td>
+      <td class="r">60</td>
+      <td class="r">55</td>
+      <td class="r pos">+5</td>
+      <td class="r">0.540</td>
+      <td class="r pos">0.549</td>
+    </tr>
+    <tr>
+      <td class="team">KC</td>
+      <td class="r">5</td>
+      <td class="r">8</td>
+      <td class="r">0.385</td>
+      <td class="r">3.0</td>
+      <td class="c">3-4</td>
+      <td class="c">2-4</td>
+      <td class="r">45</td>
+      <td class="r">59</td>
+      <td class="r neg">-14</td>
+      <td class="r">0.379</td>
+      <td class="r pos">0.426</td>
+    </tr>
+    <tr>
+      <td class="team">CWS</td>
+      <td class="r">5</td>
+      <td class="r">8</td>
+      <td class="r">0.385</td>
+      <td class="r">3.0</td>
+      <td class="c">3-3</td>
+      <td class="c">2-5</td>
+      <td class="r">43</td>
+      <td class="r">70</td>
+      <td class="r neg">-27</td>
+      <td class="r">0.291</td>
+      <td class="r pos">0.361</td>
+    </tr>
+    <tr>
+      <td class="team">DET</td>
+      <td class="r">4</td>
+      <td class="r">9</td>
+      <td class="r">0.308</td>
+      <td class="r">4.0</td>
+      <td class="c">2-1</td>
+      <td class="c">2-8</td>
+      <td class="r">54</td>
+      <td class="r">57</td>
+      <td class="r neg">-3</td>
+      <td class="r">0.475</td>
+      <td class="r neg">0.419</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+    <div class="division-label">American League West</div>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th class="r" data-tip="Wins">W</th>
+      <th class="r" data-tip="Losses">L</th>
+      <th class="r" data-tip="Win percentage (wins ÷ total games)">PCT</th>
+      <th class="r" data-tip="Games behind the division leader">GB</th>
+      <th class="c" data-tip="Home record (W-L)">Home</th>
+      <th class="c" data-tip="Away record (W-L)">Away</th>
+      <th class="r" data-tip="Runs scored">RS</th>
+      <th class="r" data-tip="Runs allowed">RA</th>
+      <th class="r" data-tip="Run differential — runs scored minus runs allowed">Diff</th>
+      <th class="r" data-tip="Pythagorean Win %. Expected record based on runs scored vs. allowed. RS^1.83 ÷ (RS^1.83 + RA^1.83). Used for power ranking tiers.">PythW%</th>
+      <th class="r" data-tip="Pythagorean Win % over the last 12 games only — shows current form. Green = trending above season average; red = trending below.">L12 PythW%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="team">TEX</td>
+      <td class="r">7</td>
+      <td class="r">5</td>
+      <td class="r">0.583</td>
+      <td class="r">0.0</td>
+      <td class="c">3-3</td>
+      <td class="c">4-2</td>
+      <td class="r">44</td>
+      <td class="r">39</td>
+      <td class="r pos">+5</td>
+      <td class="r">0.555</td>
+      <td class="r ">0.555</td>
+    </tr>
+    <tr>
+      <td class="team">HOU</td>
+      <td class="r">6</td>
+      <td class="r">7</td>
+      <td class="r">0.462</td>
+      <td class="r">1.5</td>
+      <td class="c">5-2</td>
+      <td class="c">1-5</td>
+      <td class="r">79</td>
+      <td class="r">78</td>
+      <td class="r pos">+1</td>
+      <td class="r">0.506</td>
+      <td class="r pos">0.524</td>
+    </tr>
+    <tr>
+      <td class="team">LAA</td>
+      <td class="r">6</td>
+      <td class="r">7</td>
+      <td class="r">0.462</td>
+      <td class="r">1.5</td>
+      <td class="c">3-3</td>
+      <td class="c">3-4</td>
+      <td class="r">51</td>
+      <td class="r">60</td>
+      <td class="r neg">-9</td>
+      <td class="r">0.426</td>
+      <td class="r neg">0.399</td>
+    </tr>
+    <tr>
+      <td class="team">OAK</td>
+      <td class="r">5</td>
+      <td class="r">7</td>
+      <td class="r">0.417</td>
+      <td class="r">2.0</td>
+      <td class="c">2-1</td>
+      <td class="c">3-6</td>
+      <td class="r">47</td>
+      <td class="r">59</td>
+      <td class="r neg">-12</td>
+      <td class="r">0.397</td>
+      <td class="r ">0.397</td>
+    </tr>
+    <tr>
+      <td class="team">SEA</td>
+      <td class="r">4</td>
+      <td class="r">9</td>
+      <td class="r">0.308</td>
+      <td class="r">3.5</td>
+      <td class="c">3-4</td>
+      <td class="c">1-5</td>
+      <td class="r">40</td>
+      <td class="r">42</td>
+      <td class="r neg">-2</td>
+      <td class="r">0.478</td>
+      <td class="r pos">0.500</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+  </div>
+
+  <div class="card">
+    <div class="league-label">National League</div>
+    <div class="division-label">National League East</div>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th class="r" data-tip="Wins">W</th>
+      <th class="r" data-tip="Losses">L</th>
+      <th class="r" data-tip="Win percentage (wins ÷ total games)">PCT</th>
+      <th class="r" data-tip="Games behind the division leader">GB</th>
+      <th class="c" data-tip="Home record (W-L)">Home</th>
+      <th class="c" data-tip="Away record (W-L)">Away</th>
+      <th class="r" data-tip="Runs scored">RS</th>
+      <th class="r" data-tip="Runs allowed">RA</th>
+      <th class="r" data-tip="Run differential — runs scored minus runs allowed">Diff</th>
+      <th class="r" data-tip="Pythagorean Win %. Expected record based on runs scored vs. allowed. RS^1.83 ÷ (RS^1.83 + RA^1.83). Used for power ranking tiers.">PythW%</th>
+      <th class="r" data-tip="Pythagorean Win % over the last 12 games only — shows current form. Green = trending above season average; red = trending below.">L12 PythW%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="team">ATL</td>
+      <td class="r">8</td>
+      <td class="r">5</td>
+      <td class="r">0.615</td>
+      <td class="r">0.0</td>
+      <td class="c">4-2</td>
+      <td class="c">4-3</td>
+      <td class="r">64</td>
+      <td class="r">32</td>
+      <td class="r pos">+32</td>
+      <td class="r">0.780</td>
+      <td class="r neg">0.748</td>
+    </tr>
+    <tr>
+      <td class="team">MIA</td>
+      <td class="r">8</td>
+      <td class="r">5</td>
+      <td class="r">0.615</td>
+      <td class="r">0.0</td>
+      <td class="c">7-3</td>
+      <td class="c">1-2</td>
+      <td class="r">67</td>
+      <td class="r">54</td>
+      <td class="r pos">+13</td>
+      <td class="r">0.597</td>
+      <td class="r neg">0.592</td>
+    </tr>
+    <tr>
+      <td class="team">NYM</td>
+      <td class="r">7</td>
+      <td class="r">6</td>
+      <td class="r">0.538</td>
+      <td class="r">1.0</td>
+      <td class="c">3-3</td>
+      <td class="c">4-3</td>
+      <td class="r">56</td>
+      <td class="r">49</td>
+      <td class="r pos">+7</td>
+      <td class="r">0.561</td>
+      <td class="r neg">0.532</td>
+    </tr>
+    <tr>
+      <td class="team">PHI</td>
+      <td class="r">6</td>
+      <td class="r">6</td>
+      <td class="r">0.500</td>
+      <td class="r">1.5</td>
+      <td class="c">3-3</td>
+      <td class="c">3-3</td>
+      <td class="r">42</td>
+      <td class="r">57</td>
+      <td class="r neg">-15</td>
+      <td class="r">0.364</td>
+      <td class="r ">0.364</td>
+    </tr>
+    <tr>
+      <td class="team">WSH</td>
+      <td class="r">4</td>
+      <td class="r">8</td>
+      <td class="r">0.333</td>
+      <td class="r">3.5</td>
+      <td class="c">1-5</td>
+      <td class="c">3-3</td>
+      <td class="r">71</td>
+      <td class="r">78</td>
+      <td class="r neg">-7</td>
+      <td class="r">0.457</td>
+      <td class="r ">0.457</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+    <div class="division-label">National League Central</div>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th class="r" data-tip="Wins">W</th>
+      <th class="r" data-tip="Losses">L</th>
+      <th class="r" data-tip="Win percentage (wins ÷ total games)">PCT</th>
+      <th class="r" data-tip="Games behind the division leader">GB</th>
+      <th class="c" data-tip="Home record (W-L)">Home</th>
+      <th class="c" data-tip="Away record (W-L)">Away</th>
+      <th class="r" data-tip="Runs scored">RS</th>
+      <th class="r" data-tip="Runs allowed">RA</th>
+      <th class="r" data-tip="Run differential — runs scored minus runs allowed">Diff</th>
+      <th class="r" data-tip="Pythagorean Win %. Expected record based on runs scored vs. allowed. RS^1.83 ÷ (RS^1.83 + RA^1.83). Used for power ranking tiers.">PythW%</th>
+      <th class="r" data-tip="Pythagorean Win % over the last 12 games only — shows current form. Green = trending above season average; red = trending below.">L12 PythW%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="team">MIL</td>
+      <td class="r">8</td>
+      <td class="r">4</td>
+      <td class="r">0.667</td>
+      <td class="r">0.0</td>
+      <td class="c">5-1</td>
+      <td class="c">3-3</td>
+      <td class="r">70</td>
+      <td class="r">46</td>
+      <td class="r pos">+24</td>
+      <td class="r">0.683</td>
+      <td class="r ">0.683</td>
+    </tr>
+    <tr>
+      <td class="team">CIN</td>
+      <td class="r">8</td>
+      <td class="r">5</td>
+      <td class="r">0.615</td>
+      <td class="r">0.5</td>
+      <td class="c">3-3</td>
+      <td class="c">5-2</td>
+      <td class="r">39</td>
+      <td class="r">48</td>
+      <td class="r neg">-9</td>
+      <td class="r">0.406</td>
+      <td class="r pos">0.435</td>
+    </tr>
+    <tr>
+      <td class="team">PIT</td>
+      <td class="r">7</td>
+      <td class="r">5</td>
+      <td class="r">0.583</td>
+      <td class="r">1.0</td>
+      <td class="c">4-2</td>
+      <td class="c">3-3</td>
+      <td class="r">54</td>
+      <td class="r">48</td>
+      <td class="r pos">+6</td>
+      <td class="r">0.554</td>
+      <td class="r ">0.554</td>
+    </tr>
+    <tr>
+      <td class="team">STL</td>
+      <td class="r">7</td>
+      <td class="r">5</td>
+      <td class="r">0.583</td>
+      <td class="r">1.0</td>
+      <td class="c">4-2</td>
+      <td class="c">3-3</td>
+      <td class="r">59</td>
+      <td class="r">62</td>
+      <td class="r neg">-3</td>
+      <td class="r">0.477</td>
+      <td class="r ">0.477</td>
+    </tr>
+    <tr>
+      <td class="team">CHC</td>
+      <td class="r">6</td>
+      <td class="r">6</td>
+      <td class="r">0.500</td>
+      <td class="r">2.0</td>
+      <td class="c">3-3</td>
+      <td class="c">3-3</td>
+      <td class="r">56</td>
+      <td class="r">44</td>
+      <td class="r pos">+12</td>
+      <td class="r">0.609</td>
+      <td class="r ">0.609</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+    <div class="division-label">National League West</div>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th class="r" data-tip="Wins">W</th>
+      <th class="r" data-tip="Losses">L</th>
+      <th class="r" data-tip="Win percentage (wins ÷ total games)">PCT</th>
+      <th class="r" data-tip="Games behind the division leader">GB</th>
+      <th class="c" data-tip="Home record (W-L)">Home</th>
+      <th class="c" data-tip="Away record (W-L)">Away</th>
+      <th class="r" data-tip="Runs scored">RS</th>
+      <th class="r" data-tip="Runs allowed">RA</th>
+      <th class="r" data-tip="Run differential — runs scored minus runs allowed">Diff</th>
+      <th class="r" data-tip="Pythagorean Win %. Expected record based on runs scored vs. allowed. RS^1.83 ÷ (RS^1.83 + RA^1.83). Used for power ranking tiers.">PythW%</th>
+      <th class="r" data-tip="Pythagorean Win % over the last 12 games only — shows current form. Green = trending above season average; red = trending below.">L12 PythW%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="team">LAD</td>
+      <td class="r">9</td>
+      <td class="r">3</td>
+      <td class="r">0.750</td>
+      <td class="r">0.0</td>
+      <td class="c">4-2</td>
+      <td class="c">5-1</td>
+      <td class="r">75</td>
+      <td class="r">41</td>
+      <td class="r pos">+34</td>
+      <td class="r">0.751</td>
+      <td class="r ">0.751</td>
+    </tr>
+    <tr>
+      <td class="team">SD</td>
+      <td class="r">7</td>
+      <td class="r">6</td>
+      <td class="r">0.538</td>
+      <td class="r">2.5</td>
+      <td class="c">3-4</td>
+      <td class="c">4-2</td>
+      <td class="r">53</td>
+      <td class="r">51</td>
+      <td class="r pos">+2</td>
+      <td class="r">0.518</td>
+      <td class="r pos">0.577</td>
+    </tr>
+    <tr>
+      <td class="team">AZ</td>
+      <td class="r">7</td>
+      <td class="r">6</td>
+      <td class="r">0.538</td>
+      <td class="r">2.5</td>
+      <td class="c">5-2</td>
+      <td class="c">2-4</td>
+      <td class="r">52</td>
+      <td class="r">59</td>
+      <td class="r neg">-7</td>
+      <td class="r">0.442</td>
+      <td class="r pos">0.491</td>
+    </tr>
+    <tr>
+      <td class="team">COL</td>
+      <td class="r">6</td>
+      <td class="r">7</td>
+      <td class="r">0.462</td>
+      <td class="r">3.5</td>
+      <td class="c">4-2</td>
+      <td class="c">2-5</td>
+      <td class="r">56</td>
+      <td class="r">50</td>
+      <td class="r pos">+6</td>
+      <td class="r">0.552</td>
+      <td class="r pos">0.562</td>
+    </tr>
+    <tr>
+      <td class="team">SF</td>
+      <td class="r">5</td>
+      <td class="r">8</td>
+      <td class="r">0.385</td>
+      <td class="r">4.5</td>
+      <td class="c">3-7</td>
+      <td class="c">2-1</td>
+      <td class="r">41</td>
+      <td class="r">57</td>
+      <td class="r neg">-16</td>
+      <td class="r">0.354</td>
+      <td class="r pos">0.410</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+  </div>
+</div>
+
+<div id="pitching" class="section">
+
+  <div class="card">
+    <div class="card-title">Starting Pitcher Leaderboard <span class="badge" data-tip="Sorted by Earned Run Average (lowest ERA first)">by ERA</span></div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Pitcher</th>
+          <th>Team</th>
+          <th class="r" data-tip="Win-loss record">W-L</th>
+          <th class="r" data-tip="Earned Run Average — earned runs allowed per 9 innings">ERA</th>
+          <th class="r" data-tip="Walks + Hits per Inning Pitched — measures baserunner allowance">WHIP</th>
+          <th class="r" data-tip="Innings pitched">IP</th>
+          <th class="r" data-tip="Strikeouts">K</th>
+          <th class="r" data-tip="Walks (base on balls)">BB</th>
+          <th class="r" data-tip="Games started">GS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="player">Jacob Latz</td>
+          <td class="team">TEX</td>
+          <td class="r">0-0</td>
+          <td class="r pos">0.00</td>
+          <td class="r">0.25</td>
+          <td class="r">4.0</td>
+          <td class="r">3</td>
+          <td class="r">1</td>
+          <td class="r">1</td>
+        </tr>
+        <tr>
+          <td class="player">Shohei Ohtani</td>
+          <td class="team">LAD</td>
+          <td class="r">1-0</td>
+          <td class="r pos">0.00</td>
+          <td class="r">0.75</td>
+          <td class="r">12.0</td>
+          <td class="r">8</td>
+          <td class="r">4</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Edward Cabrera</td>
+          <td class="team">CHC</td>
+          <td class="r">1-0</td>
+          <td class="r pos">0.00</td>
+          <td class="r">0.69</td>
+          <td class="r">11.2</td>
+          <td class="r">9</td>
+          <td class="r">6</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Javier Assad</td>
+          <td class="team">CHC</td>
+          <td class="r">1-0</td>
+          <td class="r pos">0.00</td>
+          <td class="r">0.53</td>
+          <td class="r">5.2</td>
+          <td class="r">3</td>
+          <td class="r">2</td>
+          <td class="r">1</td>
+        </tr>
+        <tr>
+          <td class="player">PJ Poulin</td>
+          <td class="team">WSH</td>
+          <td class="r">0-0</td>
+          <td class="r pos">0.00</td>
+          <td class="r">1.13</td>
+          <td class="r">2.2</td>
+          <td class="r">2</td>
+          <td class="r">2</td>
+          <td class="r">1</td>
+        </tr>
+        <tr>
+          <td class="player">Brandon Young</td>
+          <td class="team">BAL</td>
+          <td class="r">1-0</td>
+          <td class="r pos">0.00</td>
+          <td class="r">0.80</td>
+          <td class="r">5.0</td>
+          <td class="r">2</td>
+          <td class="r">2</td>
+          <td class="r">1</td>
+        </tr>
+        <tr>
+          <td class="player">Bryce Elder</td>
+          <td class="team">ATL</td>
+          <td class="r">1-1</td>
+          <td class="r pos">0.00</td>
+          <td class="r">0.85</td>
+          <td class="r">13.0</td>
+          <td class="r">13</td>
+          <td class="r">2</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">José Soriano</td>
+          <td class="team">LAA</td>
+          <td class="r">3-0</td>
+          <td class="r pos">0.45</td>
+          <td class="r">0.65</td>
+          <td class="r">20.0</td>
+          <td class="r">21</td>
+          <td class="r">6</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td class="player">Eduardo Rodriguez</td>
+          <td class="team">AZ</td>
+          <td class="r">1-0</td>
+          <td class="r pos">0.50</td>
+          <td class="r">1.00</td>
+          <td class="r">18.0</td>
+          <td class="r">11</td>
+          <td class="r">5</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td class="player">Michael Wacha</td>
+          <td class="team">KC</td>
+          <td class="r">1-0</td>
+          <td class="r pos">0.69</td>
+          <td class="r">0.77</td>
+          <td class="r">13.0</td>
+          <td class="r">10</td>
+          <td class="r">4</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Emerson Hancock</td>
+          <td class="team">SEA</td>
+          <td class="r">1-1</td>
+          <td class="r pos">0.71</td>
+          <td class="r">0.55</td>
+          <td class="r">12.2</td>
+          <td class="r">14</td>
+          <td class="r">1</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Sandy Alcantara</td>
+          <td class="team">MIA</td>
+          <td class="r">2-0</td>
+          <td class="r pos">0.74</td>
+          <td class="r">0.58</td>
+          <td class="r">24.1</td>
+          <td class="r">18</td>
+          <td class="r">4</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td class="player">Chase Burns</td>
+          <td class="team">CIN</td>
+          <td class="r">1-0</td>
+          <td class="r pos">0.82</td>
+          <td class="r">0.91</td>
+          <td class="r">11.0</td>
+          <td class="r">16</td>
+          <td class="r">4</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Parker Messick</td>
+          <td class="team">CLE</td>
+          <td class="r">1-0</td>
+          <td class="r pos">0.82</td>
+          <td class="r">0.91</td>
+          <td class="r">11.0</td>
+          <td class="r">11</td>
+          <td class="r">3</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Hunter Brown</td>
+          <td class="team">HOU</td>
+          <td class="r">1-0</td>
+          <td class="r pos">0.84</td>
+          <td class="r">1.03</td>
+          <td class="r">10.2</td>
+          <td class="r">17</td>
+          <td class="r">6</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Michael Soroka</td>
+          <td class="team">AZ</td>
+          <td class="r">2-0</td>
+          <td class="r pos">0.90</td>
+          <td class="r">1.20</td>
+          <td class="r">10.0</td>
+          <td class="r">13</td>
+          <td class="r">4</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Chad Patrick</td>
+          <td class="team">MIL</td>
+          <td class="r">1-0</td>
+          <td class="r pos">0.96</td>
+          <td class="r">1.39</td>
+          <td class="r">9.1</td>
+          <td class="r">7</td>
+          <td class="r">4</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Mitch Keller</td>
+          <td class="team">PIT</td>
+          <td class="r">1-0</td>
+          <td class="r pos">1.00</td>
+          <td class="r">0.94</td>
+          <td class="r">18.0</td>
+          <td class="r">11</td>
+          <td class="r">5</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td class="player">Randy Vásquez</td>
+          <td class="team">SD</td>
+          <td class="r">1-0</td>
+          <td class="r ">1.02</td>
+          <td class="r">1.08</td>
+          <td class="r">17.2</td>
+          <td class="r">19</td>
+          <td class="r">4</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td class="player">Taj Bradley</td>
+          <td class="team">MIN</td>
+          <td class="r">2-0</td>
+          <td class="r ">1.08</td>
+          <td class="r">1.08</td>
+          <td class="r">16.2</td>
+          <td class="r">22</td>
+          <td class="r">4</td>
+          <td class="r">3</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Pitcher Profiles <span class="badge" data-tip="Classified by GO/AO ratio: GB = ground ball pitcher (≥1.5), FB = fly ball pitcher (≤0.75), NEU = neutral">GB/FB Tendency</span></div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Pitcher</th>
+          <th>Team</th>
+          <th class="c" data-tip="Pitcher type: GB = ground ball (≥1.5 GO/AO), FB = fly ball (≤0.75 GO/AO), NEU = neutral">Type</th>
+          <th class="r" data-tip="Ground outs to air outs ratio. Higher = keeps ball on ground; lower = gives up more fly balls.">GO/AO</th>
+          <th class="r" data-tip="Earned Run Average — earned runs allowed per 9 innings">ERA</th>
+          <th class="r" data-tip="Walks + Hits per Inning Pitched">WHIP</th>
+          <th class="r" data-tip="Strikeouts">K</th>
+          <th class="r" data-tip="Home runs allowed">HR</th>
+          <th class="r" data-tip="Innings pitched">IP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="player">Brayan Bello</td>
+          <td class="team">BOS</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">3.50</td>
+          <td class="r">9.00</td>
+          <td class="r">2.50</td>
+          <td class="r">7</td>
+          <td class="r">1</td>
+          <td class="r">8.0</td>
+        </tr>
+        <tr>
+          <td class="player">Tyler Mahle</td>
+          <td class="team">SF</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">2.71</td>
+          <td class="r">4.30</td>
+          <td class="r">1.57</td>
+          <td class="r">15</td>
+          <td class="r">2</td>
+          <td class="r">14.2</td>
+        </tr>
+        <tr>
+          <td class="player">Michael Lorenzen</td>
+          <td class="team">COL</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">2.22</td>
+          <td class="r">9.00</td>
+          <td class="r">2.31</td>
+          <td class="r">10</td>
+          <td class="r">3</td>
+          <td class="r">13.0</td>
+        </tr>
+        <tr>
+          <td class="player">Lance McCullers Jr.</td>
+          <td class="team">HOU</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">2.20</td>
+          <td class="r">3.27</td>
+          <td class="r">1.18</td>
+          <td class="r">13</td>
+          <td class="r">0</td>
+          <td class="r">11.0</td>
+        </tr>
+        <tr>
+          <td class="player">Andre Pallante</td>
+          <td class="team">STL</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">2.13</td>
+          <td class="r">1.80</td>
+          <td class="r">1.30</td>
+          <td class="r">5</td>
+          <td class="r">0</td>
+          <td class="r">10.0</td>
+        </tr>
+        <tr>
+          <td class="player">Clay Holmes</td>
+          <td class="team">NYM</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">2.11</td>
+          <td class="r">1.42</td>
+          <td class="r">0.95</td>
+          <td class="r">9</td>
+          <td class="r">1</td>
+          <td class="r">12.2</td>
+        </tr>
+        <tr>
+          <td class="player">Adrian Houser</td>
+          <td class="team">SF</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">2.11</td>
+          <td class="r">3.97</td>
+          <td class="r">1.59</td>
+          <td class="r">7</td>
+          <td class="r">0</td>
+          <td class="r">11.1</td>
+        </tr>
+        <tr>
+          <td class="player">Logan Webb</td>
+          <td class="team">SF</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">2.08</td>
+          <td class="r">5.00</td>
+          <td class="r">1.39</td>
+          <td class="r">15</td>
+          <td class="r">0</td>
+          <td class="r">18.0</td>
+        </tr>
+        <tr>
+          <td class="player">José Soriano</td>
+          <td class="team">LAA</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">2.08</td>
+          <td class="r">0.45</td>
+          <td class="r">0.65</td>
+          <td class="r">21</td>
+          <td class="r">1</td>
+          <td class="r">20.0</td>
+        </tr>
+        <tr>
+          <td class="player">Brady Singer</td>
+          <td class="team">CIN</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">2.00</td>
+          <td class="r">7.71</td>
+          <td class="r">2.06</td>
+          <td class="r">13</td>
+          <td class="r">2</td>
+          <td class="r">11.2</td>
+        </tr>
+        <tr>
+          <td class="player">Landen Roupp</td>
+          <td class="team">SF</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">2.00</td>
+          <td class="r">4.22</td>
+          <td class="r">1.13</td>
+          <td class="r">14</td>
+          <td class="r">0</td>
+          <td class="r">10.2</td>
+        </tr>
+        <tr>
+          <td class="player">Sonny Gray</td>
+          <td class="team">BOS</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">1.86</td>
+          <td class="r">2.76</td>
+          <td class="r">0.98</td>
+          <td class="r">10</td>
+          <td class="r">1</td>
+          <td class="r">16.1</td>
+        </tr>
+        <tr>
+          <td class="player">Luis Castillo</td>
+          <td class="team">SEA</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">1.83</td>
+          <td class="r">2.79</td>
+          <td class="r">1.24</td>
+          <td class="r">11</td>
+          <td class="r">0</td>
+          <td class="r">9.2</td>
+        </tr>
+        <tr>
+          <td class="player">David Peterson</td>
+          <td class="team">NYM</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">1.82</td>
+          <td class="r">6.14</td>
+          <td class="r">1.84</td>
+          <td class="r">14</td>
+          <td class="r">0</td>
+          <td class="r">14.2</td>
+        </tr>
+        <tr>
+          <td class="player">Carmen Mlodzinski</td>
+          <td class="team">PIT</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">1.80</td>
+          <td class="r">4.00</td>
+          <td class="r">1.56</td>
+          <td class="r">13</td>
+          <td class="r">0</td>
+          <td class="r">9.0</td>
+        </tr>
+        <tr>
+          <td class="player">George Kirby</td>
+          <td class="team">SEA</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">1.79</td>
+          <td class="r">3.60</td>
+          <td class="r">0.90</td>
+          <td class="r">16</td>
+          <td class="r">3</td>
+          <td class="r">20.0</td>
+        </tr>
+        <tr>
+          <td class="player">Brandon Pfaadt</td>
+          <td class="team">AZ</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">1.78</td>
+          <td class="r">6.75</td>
+          <td class="r">1.41</td>
+          <td class="r">5</td>
+          <td class="r">1</td>
+          <td class="r">10.2</td>
+        </tr>
+        <tr>
+          <td class="player">Tatsuya Imai</td>
+          <td class="team">HOU</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">1.75</td>
+          <td class="r">4.32</td>
+          <td class="r">1.56</td>
+          <td class="r">13</td>
+          <td class="r">0</td>
+          <td class="r">8.1</td>
+        </tr>
+        <tr>
+          <td class="player">Jesús Luzardo</td>
+          <td class="team">PHI</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">1.71</td>
+          <td class="r">4.97</td>
+          <td class="r">0.95</td>
+          <td class="r">18</td>
+          <td class="r">2</td>
+          <td class="r">12.2</td>
+        </tr>
+        <tr>
+          <td class="player">Freddy Peralta</td>
+          <td class="team">NYM</td>
+          <td class="c"><span class="ptag ptag-gb">GB</span></td>
+          <td class="r">1.70</td>
+          <td class="r">4.80</td>
+          <td class="r">1.13</td>
+          <td class="r">19</td>
+          <td class="r">2</td>
+          <td class="r">15.0</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Yesterday's Starting Pitcher Performances</div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Matchup</th>
+          <th>Pitcher</th>
+          <th>Team</th>
+          <th class="r" data-tip="Innings pitched">IP</th>
+          <th class="r" data-tip="Hits allowed">H</th>
+          <th class="r" data-tip="Earned runs allowed">ER</th>
+          <th class="r" data-tip="Strikeouts">K</th>
+          <th class="r" data-tip="Walks issued">BB</th>
+          <th class="c" data-tip="Decision — W (win), L (loss), or ND (no decision)">Dec</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="">
+          <td>OAK @ NYY</td>
+          <td class="player">Ryan Weathers</td>
+          <td class="team">NYY</td>
+          <td class="r">8.0</td>
+          <td class="r">7</td>
+          <td class="r">1</td>
+          <td class="r">7</td>
+          <td class="r">0</td>
+          <td class="c l">L</td>
+        </tr>
+        <tr class="hot">
+          <td>OAK @ NYY</td>
+          <td class="player">Jeffrey Springs</td>
+          <td class="team">OAK</td>
+          <td class="r">7.0</td>
+          <td class="r">1</td>
+          <td class="r">0</td>
+          <td class="r">6</td>
+          <td class="r">2</td>
+          <td class="c w">W</td>
+        </tr>
+        <tr class="">
+          <td>AZ @ NYM</td>
+          <td class="player">Nolan McLean</td>
+          <td class="team">NYM</td>
+          <td class="r">6.1</td>
+          <td class="r">3</td>
+          <td class="r">2</td>
+          <td class="r">8</td>
+          <td class="r">2</td>
+          <td class="c l">L</td>
+        </tr>
+        <tr class="">
+          <td>CWS @ KC</td>
+          <td class="player">Seth Lugo</td>
+          <td class="team">KC</td>
+          <td class="r">6.1</td>
+          <td class="r">4</td>
+          <td class="r">1</td>
+          <td class="r">4</td>
+          <td class="r">4</td>
+          <td class="c l">L</td>
+        </tr>
+        <tr class="hot">
+          <td>DET @ MIN</td>
+          <td class="player">Mick Abel</td>
+          <td class="team">MIN</td>
+          <td class="r">6.0</td>
+          <td class="r">4</td>
+          <td class="r">0</td>
+          <td class="r">6</td>
+          <td class="r">3</td>
+          <td class="c ">ND</td>
+        </tr>
+        <tr class="">
+          <td>AZ @ NYM</td>
+          <td class="player">Eduardo Rodriguez</td>
+          <td class="team">AZ</td>
+          <td class="r">6.0</td>
+          <td class="r">5</td>
+          <td class="r">1</td>
+          <td class="r">3</td>
+          <td class="r">2</td>
+          <td class="c w">W</td>
+        </tr>
+        <tr class="">
+          <td>COL @ SD</td>
+          <td class="player">Randy Vásquez</td>
+          <td class="team">SD</td>
+          <td class="r">5.2</td>
+          <td class="r">7</td>
+          <td class="r">1</td>
+          <td class="r">8</td>
+          <td class="r">0</td>
+          <td class="c ">ND</td>
+        </tr>
+        <tr class="">
+          <td>DET @ MIN</td>
+          <td class="player">Jack Flaherty</td>
+          <td class="team">DET</td>
+          <td class="r">5.2</td>
+          <td class="r">5</td>
+          <td class="r">1</td>
+          <td class="r">6</td>
+          <td class="r">3</td>
+          <td class="c ">ND</td>
+        </tr>
+        <tr class="">
+          <td>CWS @ KC</td>
+          <td class="player">Anthony Kay</td>
+          <td class="team">CWS</td>
+          <td class="r">5.2</td>
+          <td class="r">3</td>
+          <td class="r">0</td>
+          <td class="r">6</td>
+          <td class="r">2</td>
+          <td class="c w">W</td>
+        </tr>
+        <tr class="">
+          <td>CIN @ MIA</td>
+          <td class="player">Rhett Lowder</td>
+          <td class="team">CIN</td>
+          <td class="r">5.1</td>
+          <td class="r">8</td>
+          <td class="r">4</td>
+          <td class="r">2</td>
+          <td class="r">2</td>
+          <td class="c l">L</td>
+        </tr>
+        <tr class="">
+          <td>CIN @ MIA</td>
+          <td class="player">Max Meyer</td>
+          <td class="team">MIA</td>
+          <td class="r">5.0</td>
+          <td class="r">4</td>
+          <td class="r">1</td>
+          <td class="r">4</td>
+          <td class="r">3</td>
+          <td class="c w">W</td>
+        </tr>
+        <tr class="">
+          <td>COL @ SD</td>
+          <td class="player">Jimmy Herget</td>
+          <td class="team">COL</td>
+          <td class="r">1.0</td>
+          <td class="r">0</td>
+          <td class="r">0</td>
+          <td class="r">0</td>
+          <td class="r">0</td>
+          <td class="c ">ND</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Closer & Reliever Watch</div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Pitcher</th>
+          <th>Team</th>
+          <th class="r" data-tip="Saves — recorded when a pitcher finishes a win started by someone else while protecting a lead of 3 or fewer">SV</th>
+          <th class="r" data-tip="Holds — entering with a save situation, retiring at least one batter, and leaving with the lead (not closing)">HLD</th>
+          <th class="r" data-tip="Innings pitched">IP</th>
+          <th class="r" data-tip="Strikeouts">K</th>
+          <th class="r" data-tip="Earned Run Average — earned runs allowed per 9 innings">ERA</th>
+          <th class="r" data-tip="Walks issued">BB</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="player">David Bednar</td>
+          <td class="team">NYY</td>
+          <td class="r">5</td>
+          <td class="r">0</td>
+          <td class="r">6.1</td>
+          <td class="r">7</td>
+          <td class="r">4.26</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td class="player">Jordan Romano</td>
+          <td class="team">LAA</td>
+          <td class="r">4</td>
+          <td class="r">0</td>
+          <td class="r">5.0</td>
+          <td class="r">7</td>
+          <td class="r">0.00</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Edwin Díaz</td>
+          <td class="team">LAD</td>
+          <td class="r">4</td>
+          <td class="r">0</td>
+          <td class="r">5.0</td>
+          <td class="r">8</td>
+          <td class="r">1.80</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td class="player">Emilio Pagán</td>
+          <td class="team">CIN</td>
+          <td class="r">4</td>
+          <td class="r">0</td>
+          <td class="r">7.1</td>
+          <td class="r">8</td>
+          <td class="r">6.14</td>
+          <td class="r">5</td>
+        </tr>
+        <tr>
+          <td class="player">Jhoan Duran</td>
+          <td class="team">PHI</td>
+          <td class="r">4</td>
+          <td class="r">0</td>
+          <td class="r">5.2</td>
+          <td class="r">7</td>
+          <td class="r">1.59</td>
+          <td class="r">0</td>
+        </tr>
+        <tr>
+          <td class="player">Ryan Helsley</td>
+          <td class="team">BAL</td>
+          <td class="r">4</td>
+          <td class="r">0</td>
+          <td class="r">4.1</td>
+          <td class="r">7</td>
+          <td class="r">4.15</td>
+          <td class="r">4</td>
+        </tr>
+        <tr>
+          <td class="player">Mason Miller</td>
+          <td class="team">SD</td>
+          <td class="r">4</td>
+          <td class="r">0</td>
+          <td class="r">6.1</td>
+          <td class="r">16</td>
+          <td class="r">0.00</td>
+          <td class="r">1</td>
+        </tr>
+        <tr>
+          <td class="player">Lucas Erceg</td>
+          <td class="team">KC</td>
+          <td class="r">3</td>
+          <td class="r">1</td>
+          <td class="r">4.2</td>
+          <td class="r">3</td>
+          <td class="r">3.86</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Riley O&#39;Brien</td>
+          <td class="team">STL</td>
+          <td class="r">3</td>
+          <td class="r">1</td>
+          <td class="r">7.1</td>
+          <td class="r">7</td>
+          <td class="r">0.00</td>
+          <td class="r">0</td>
+        </tr>
+        <tr>
+          <td class="player">Aroldis Chapman</td>
+          <td class="team">BOS</td>
+          <td class="r">3</td>
+          <td class="r">0</td>
+          <td class="r">5.0</td>
+          <td class="r">3</td>
+          <td class="r">1.80</td>
+          <td class="r">2</td>
+        </tr>
+        <tr>
+          <td class="player">Paul Sewald</td>
+          <td class="team">AZ</td>
+          <td class="r">3</td>
+          <td class="r">0</td>
+          <td class="r">4.1</td>
+          <td class="r">7</td>
+          <td class="r">4.15</td>
+          <td class="r">0</td>
+        </tr>
+        <tr>
+          <td class="player">Trevor Megill</td>
+          <td class="team">MIL</td>
+          <td class="r">3</td>
+          <td class="r">0</td>
+          <td class="r">4.0</td>
+          <td class="r">5</td>
+          <td class="r">2.25</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td class="player">Cade Smith</td>
+          <td class="team">CLE</td>
+          <td class="r">3</td>
+          <td class="r">0</td>
+          <td class="r">7.0</td>
+          <td class="r">10</td>
+          <td class="r">6.43</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td class="player">Jakob Junis</td>
+          <td class="team">TEX</td>
+          <td class="r">2</td>
+          <td class="r">2</td>
+          <td class="r">7.0</td>
+          <td class="r">4</td>
+          <td class="r">0.00</td>
+          <td class="r">0</td>
+        </tr>
+        <tr>
+          <td class="player">Tyler Alexander</td>
+          <td class="team">TEX</td>
+          <td class="r">2</td>
+          <td class="r">1</td>
+          <td class="r">5.2</td>
+          <td class="r">5</td>
+          <td class="r">1.59</td>
+          <td class="r">2</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+</div>
+
+<div id="batting" class="section">
+
+  <div class="card">
+    <div class="card-title">Batting Leaderboard <span class="badge" data-tip="Sorted by OPS (On-base Plus Slugging) — highest first">by OPS</span></div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>Team</th>
+          <th class="r" data-tip="Batting average (hits ÷ at-bats)">AVG</th>
+          <th class="r" data-tip="On-base Plus Slugging — OBP + SLG. Best single measure of offensive production.">OPS</th>
+          <th class="r" data-tip="Home runs">HR</th>
+          <th class="r" data-tip="Runs batted in">RBI</th>
+          <th class="r" data-tip="Runs scored">R</th>
+          <th class="r" data-tip="Hits">H</th>
+          <th class="r" data-tip="Walks drawn (base on balls)">BB</th>
+          <th class="r" data-tip="Stolen bases">SB</th>
+          <th class="r" data-tip="Games played">GP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td class="player">Joey Wiemer</td>
+          <td class="team">WSH</td>
+          <td class="r">0.440</td>
+          <td class="r pos">1.293</td>
+          <td class="r">2</td>
+          <td class="r">4</td>
+          <td class="r">8</td>
+          <td class="r">11</td>
+          <td class="r">5</td>
+          <td class="r">0</td>
+          <td class="r">8</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td class="player">Ildemaro Vargas</td>
+          <td class="team">AZ</td>
+          <td class="r">0.458</td>
+          <td class="r pos">1.250</td>
+          <td class="r">1</td>
+          <td class="r">4</td>
+          <td class="r">5</td>
+          <td class="r">11</td>
+          <td class="r">2</td>
+          <td class="r">0</td>
+          <td class="r">7</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td class="player">Sal Stewart</td>
+          <td class="team">CIN</td>
+          <td class="r">0.364</td>
+          <td class="r pos">1.200</td>
+          <td class="r">4</td>
+          <td class="r">9</td>
+          <td class="r">8</td>
+          <td class="r">16</td>
+          <td class="r">10</td>
+          <td class="r">3</td>
+          <td class="r">13</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td class="player">Yordan Alvarez</td>
+          <td class="team">HOU</td>
+          <td class="r">0.317</td>
+          <td class="r ">1.183</td>
+          <td class="r">4</td>
+          <td class="r">10</td>
+          <td class="r">10</td>
+          <td class="r">13</td>
+          <td class="r">13</td>
+          <td class="r">1</td>
+          <td class="r">13</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td class="player">Ben Rice</td>
+          <td class="team">NYY</td>
+          <td class="r">0.324</td>
+          <td class="r ">1.155</td>
+          <td class="r">3</td>
+          <td class="r">11</td>
+          <td class="r">11</td>
+          <td class="r">12</td>
+          <td class="r">11</td>
+          <td class="r">1</td>
+          <td class="r">11</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td class="player">Gary Sánchez</td>
+          <td class="team">MIL</td>
+          <td class="r">0.263</td>
+          <td class="r ">1.154</td>
+          <td class="r">3</td>
+          <td class="r">5</td>
+          <td class="r">4</td>
+          <td class="r">5</td>
+          <td class="r">5</td>
+          <td class="r">0</td>
+          <td class="r">7</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td class="player">Connor Wong</td>
+          <td class="team">BOS</td>
+          <td class="r">0.417</td>
+          <td class="r ">1.129</td>
+          <td class="r">0</td>
+          <td class="r">1</td>
+          <td class="r">0</td>
+          <td class="r">5</td>
+          <td class="r">0</td>
+          <td class="r">0</td>
+          <td class="r">5</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td class="player">Andy Pages</td>
+          <td class="team">LAD</td>
+          <td class="r">0.413</td>
+          <td class="r ">1.112</td>
+          <td class="r">3</td>
+          <td class="r">12</td>
+          <td class="r">6</td>
+          <td class="r">19</td>
+          <td class="r">2</td>
+          <td class="r">1</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td class="player">Wilyer Abreu</td>
+          <td class="team">BOS</td>
+          <td class="r">0.383</td>
+          <td class="r ">1.110</td>
+          <td class="r">3</td>
+          <td class="r">9</td>
+          <td class="r">8</td>
+          <td class="r">18</td>
+          <td class="r">2</td>
+          <td class="r">0</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td class="player">Corbin Carroll</td>
+          <td class="team">AZ</td>
+          <td class="r">0.333</td>
+          <td class="r ">1.098</td>
+          <td class="r">2</td>
+          <td class="r">11</td>
+          <td class="r">9</td>
+          <td class="r">14</td>
+          <td class="r">6</td>
+          <td class="r">1</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td class="player">Curtis Mead</td>
+          <td class="team">WSH</td>
+          <td class="r">0.333</td>
+          <td class="r ">1.079</td>
+          <td class="r">1</td>
+          <td class="r">3</td>
+          <td class="r">2</td>
+          <td class="r">5</td>
+          <td class="r">2</td>
+          <td class="r">1</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td class="player">Ryan O&#39;Hearn</td>
+          <td class="team">PIT</td>
+          <td class="r">0.350</td>
+          <td class="r ">1.074</td>
+          <td class="r">3</td>
+          <td class="r">11</td>
+          <td class="r">6</td>
+          <td class="r">14</td>
+          <td class="r">8</td>
+          <td class="r">0</td>
+          <td class="r">11</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td class="player">Josh Bell</td>
+          <td class="team">MIN</td>
+          <td class="r">0.317</td>
+          <td class="r ">1.065</td>
+          <td class="r">3</td>
+          <td class="r">10</td>
+          <td class="r">11</td>
+          <td class="r">13</td>
+          <td class="r">8</td>
+          <td class="r">0</td>
+          <td class="r">13</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td class="player">Jordan Walker</td>
+          <td class="team">STL</td>
+          <td class="r">0.295</td>
+          <td class="r ">1.049</td>
+          <td class="r">5</td>
+          <td class="r">12</td>
+          <td class="r">10</td>
+          <td class="r">13</td>
+          <td class="r">5</td>
+          <td class="r">1</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td class="player">Christian Walker</td>
+          <td class="team">HOU</td>
+          <td class="r">0.340</td>
+          <td class="r ">1.040</td>
+          <td class="r">3</td>
+          <td class="r">13</td>
+          <td class="r">9</td>
+          <td class="r">17</td>
+          <td class="r">5</td>
+          <td class="r">0</td>
+          <td class="r">13</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td class="player">Taylor Ward</td>
+          <td class="team">BAL</td>
+          <td class="r">0.383</td>
+          <td class="r ">1.038</td>
+          <td class="r">0</td>
+          <td class="r">8</td>
+          <td class="r">5</td>
+          <td class="r">18</td>
+          <td class="r">8</td>
+          <td class="r">0</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td class="player">Jose Altuve</td>
+          <td class="team">HOU</td>
+          <td class="r">0.333</td>
+          <td class="r ">1.030</td>
+          <td class="r">2</td>
+          <td class="r">6</td>
+          <td class="r">12</td>
+          <td class="r">15</td>
+          <td class="r">12</td>
+          <td class="r">1</td>
+          <td class="r">13</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td class="player">Brendan Donovan</td>
+          <td class="team">SEA</td>
+          <td class="r">0.316</td>
+          <td class="r ">1.027</td>
+          <td class="r">3</td>
+          <td class="r">5</td>
+          <td class="r">5</td>
+          <td class="r">12</td>
+          <td class="r">5</td>
+          <td class="r">1</td>
+          <td class="r">11</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td class="player">Xavier Edwards</td>
+          <td class="team">MIA</td>
+          <td class="r">0.396</td>
+          <td class="r ">1.016</td>
+          <td class="r">1</td>
+          <td class="r">6</td>
+          <td class="r">11</td>
+          <td class="r">19</td>
+          <td class="r">5</td>
+          <td class="r">2</td>
+          <td class="r">13</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td class="player">Drake Baldwin</td>
+          <td class="team">ATL</td>
+          <td class="r">0.321</td>
+          <td class="r ">1.013</td>
+          <td class="r">5</td>
+          <td class="r">15</td>
+          <td class="r">12</td>
+          <td class="r">17</td>
+          <td class="r">4</td>
+          <td class="r">0</td>
+          <td class="r">13</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Home Run Leaders</div>
+      <table>
+        <thead><tr>
+          <th>Player</th>
+          <th>Team</th>
+          <th class="r" data-tip="Home runs">HR</th>
+          <th class="r" data-tip="Games played">GP</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="player">Jordan Walker</td>
+            <td class="team">STL</td>
+            <td class="r pos">5</td>
+            <td class="r">12</td>
+          </tr>
+          <tr>
+            <td class="player">Drake Baldwin</td>
+            <td class="team">ATL</td>
+            <td class="r pos">5</td>
+            <td class="r">13</td>
+          </tr>
+          <tr>
+            <td class="player">Chase DeLauter</td>
+            <td class="team">CLE</td>
+            <td class="r pos">5</td>
+            <td class="r">12</td>
+          </tr>
+          <tr>
+            <td class="player">Shea Langeliers</td>
+            <td class="team">OAK</td>
+            <td class="r pos">5</td>
+            <td class="r">11</td>
+          </tr>
+          <tr>
+            <td class="player">Sal Stewart</td>
+            <td class="team">CIN</td>
+            <td class="r pos">4</td>
+            <td class="r">13</td>
+          </tr>
+          <tr>
+            <td class="player">Yordan Alvarez</td>
+            <td class="team">HOU</td>
+            <td class="r pos">4</td>
+            <td class="r">13</td>
+          </tr>
+          <tr>
+            <td class="player">CJ Abrams</td>
+            <td class="team">WSH</td>
+            <td class="r pos">4</td>
+            <td class="r">11</td>
+          </tr>
+          <tr>
+            <td class="player">Oneil Cruz</td>
+            <td class="team">PIT</td>
+            <td class="r pos">4</td>
+            <td class="r">12</td>
+          </tr>
+          <tr>
+            <td class="player">Gunnar Henderson</td>
+            <td class="team">BAL</td>
+            <td class="r pos">4</td>
+            <td class="r">12</td>
+          </tr>
+          <tr>
+            <td class="player">Ian Happ</td>
+            <td class="team">CHC</td>
+            <td class="r pos">4</td>
+            <td class="r">10</td>
+          </tr>
+          <tr>
+            <td class="player">Munetaka Murakami</td>
+            <td class="team">CWS</td>
+            <td class="r pos">4</td>
+            <td class="r">13</td>
+          </tr>
+          <tr>
+            <td class="player">Zach Neto</td>
+            <td class="team">LAA</td>
+            <td class="r pos">4</td>
+            <td class="r">13</td>
+          </tr>
+          <tr>
+            <td class="player">James Wood</td>
+            <td class="team">WSH</td>
+            <td class="r pos">4</td>
+            <td class="r">12</td>
+          </tr>
+          <tr>
+            <td class="player">Ben Rice</td>
+            <td class="team">NYY</td>
+            <td class="r pos">3</td>
+            <td class="r">11</td>
+          </tr>
+          <tr>
+            <td class="player">Gary Sánchez</td>
+            <td class="team">MIL</td>
+            <td class="r pos">3</td>
+            <td class="r">7</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Speed Leaders <span class="badge">Stolen Bases</span></div>
+      <table>
+        <thead><tr>
+          <th>Player</th>
+          <th>Team</th>
+          <th class="r" data-tip="Stolen bases">SB</th>
+          <th class="r" data-tip="Caught stealing">CS</th>
+          <th class="r" data-tip="Stolen base success rate — SB ÷ (SB + CS)">%</th>
+          <th class="r" data-tip="Games played">GP</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="player">Bobby Witt Jr.</td>
+            <td class="team">KC</td>
+            <td class="r pos">8</td>
+            <td class="r">0</td>
+            <td class="r">100%</td>
+            <td class="r">13</td>
+          </tr>
+          <tr>
+            <td class="player">Nasim Nuñez</td>
+            <td class="team">WSH</td>
+            <td class="r pos">7</td>
+            <td class="r">0</td>
+            <td class="r">100%</td>
+            <td class="r">10</td>
+          </tr>
+          <tr>
+            <td class="player">Jakob Marsee</td>
+            <td class="team">MIA</td>
+            <td class="r pos">6</td>
+            <td class="r">1</td>
+            <td class="r">86%</td>
+            <td class="r">13</td>
+          </tr>
+          <tr>
+            <td class="player">Nico Hoerner</td>
+            <td class="team">CHC</td>
+            <td class="r pos">5</td>
+            <td class="r">0</td>
+            <td class="r">100%</td>
+            <td class="r">12</td>
+          </tr>
+          <tr>
+            <td class="player">José Caballero</td>
+            <td class="team">NYY</td>
+            <td class="r pos">5</td>
+            <td class="r">0</td>
+            <td class="r">100%</td>
+            <td class="r">11</td>
+          </tr>
+          <tr>
+            <td class="player">Jazz Chisholm Jr.</td>
+            <td class="team">NYY</td>
+            <td class="r pos">5</td>
+            <td class="r">1</td>
+            <td class="r">83%</td>
+            <td class="r">12</td>
+          </tr>
+          <tr>
+            <td class="player">Chandler Simpson</td>
+            <td class="team">TB</td>
+            <td class="r pos">5</td>
+            <td class="r">1</td>
+            <td class="r">83%</td>
+            <td class="r">12</td>
+          </tr>
+          <tr>
+            <td class="player">Kyle Isbel</td>
+            <td class="team">KC</td>
+            <td class="r pos">4</td>
+            <td class="r">0</td>
+            <td class="r">100%</td>
+            <td class="r">10</td>
+          </tr>
+          <tr>
+            <td class="player">Jake McCarthy</td>
+            <td class="team">COL</td>
+            <td class="r pos">4</td>
+            <td class="r">0</td>
+            <td class="r">100%</td>
+            <td class="r">12</td>
+          </tr>
+          <tr>
+            <td class="player">Luisangel Acuña</td>
+            <td class="team">CWS</td>
+            <td class="r pos">4</td>
+            <td class="r">0</td>
+            <td class="r">100%</td>
+            <td class="r">12</td>
+          </tr>
+          <tr>
+            <td class="player">CJ Abrams</td>
+            <td class="team">WSH</td>
+            <td class="r pos">4</td>
+            <td class="r">0</td>
+            <td class="r">100%</td>
+            <td class="r">11</td>
+          </tr>
+          <tr>
+            <td class="player">Carson Benge</td>
+            <td class="team">NYM</td>
+            <td class="r pos">4</td>
+            <td class="r">0</td>
+            <td class="r">100%</td>
+            <td class="r">11</td>
+          </tr>
+          <tr>
+            <td class="player">David Hamilton</td>
+            <td class="team">MIL</td>
+            <td class="r pos">4</td>
+            <td class="r">1</td>
+            <td class="r">80%</td>
+            <td class="r">9</td>
+          </tr>
+          <tr>
+            <td class="player">Brice Turang</td>
+            <td class="team">MIL</td>
+            <td class="r pos">4</td>
+            <td class="r">1</td>
+            <td class="r">80%</td>
+            <td class="r">10</td>
+          </tr>
+          <tr>
+            <td class="player">Pete Crow-Armstrong</td>
+            <td class="team">CHC</td>
+            <td class="r pos">4</td>
+            <td class="r">1</td>
+            <td class="r">80%</td>
+            <td class="r">12</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">BABIP Luck Watch <span class="badge">Regression Candidates</span></div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Team</th>
+          <th class="r" data-tip="Batting Average on Balls In Play. Excludes home runs and strikeouts. League average is ~.300. Extreme values often reflect luck.">BABIP</th>
+          <th class="r" data-tip="Difference from the .300 league average. Positive = running hot (likely to decline); negative = running cold (likely to improve).">vs .300</th>
+          <th class="r" data-tip="Batting average (hits ÷ at-bats)">AVG</th>
+          <th class="r" data-tip="On-base Plus Slugging — OBP + SLG">OPS</th>
+          <th class="r" data-tip="At-bats (minimum 25 required to appear)">AB</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="player">Connor Wong</td>
+          <td class="team">BOS</td>
+          <td class="r neg" >0.625</td>
+          <td class="r neg">+0.325</td>
+          <td class="r">0.417</td>
+          <td class="r">1.129</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td class="player">Joey Wiemer</td>
+          <td class="team">WSH</td>
+          <td class="r neg" >0.600</td>
+          <td class="r neg">+0.300</td>
+          <td class="r">0.440</td>
+          <td class="r">1.293</td>
+          <td class="r">25</td>
+        </tr>
+        <tr>
+          <td class="player">Garrett Mitchell</td>
+          <td class="team">MIL</td>
+          <td class="r neg" >0.571</td>
+          <td class="r neg">+0.271</td>
+          <td class="r">0.310</td>
+          <td class="r">0.946</td>
+          <td class="r">29</td>
+        </tr>
+        <tr>
+          <td class="player">Andy Pages</td>
+          <td class="team">LAD</td>
+          <td class="r neg" >0.533</td>
+          <td class="r neg">+0.233</td>
+          <td class="r">0.413</td>
+          <td class="r">1.112</td>
+          <td class="r">46</td>
+        </tr>
+        <tr>
+          <td class="player">Addison Barger</td>
+          <td class="team">TOR</td>
+          <td class="r " style="color:var(--cyan)">0.071</td>
+          <td class="r pos">-0.229</td>
+          <td class="r">0.053</td>
+          <td class="r">0.279</td>
+          <td class="r">19</td>
+        </tr>
+        <tr>
+          <td class="player">Marcell Ozuna</td>
+          <td class="team">PIT</td>
+          <td class="r " style="color:var(--cyan)">0.087</td>
+          <td class="r pos">-0.213</td>
+          <td class="r">0.065</td>
+          <td class="r">0.236</td>
+          <td class="r">31</td>
+        </tr>
+        <tr>
+          <td class="player">Christian Yelich</td>
+          <td class="team">MIL</td>
+          <td class="r neg" >0.500</td>
+          <td class="r neg">+0.200</td>
+          <td class="r">0.372</td>
+          <td class="r">0.948</td>
+          <td class="r">43</td>
+        </tr>
+        <tr>
+          <td class="player">Austin Hedges</td>
+          <td class="team">CLE</td>
+          <td class="r neg" >0.500</td>
+          <td class="r neg">+0.200</td>
+          <td class="r">0.400</td>
+          <td class="r">0.933</td>
+          <td class="r">15</td>
+        </tr>
+        <tr>
+          <td class="player">Hunter Feduccia</td>
+          <td class="team">TB</td>
+          <td class="r neg" >0.500</td>
+          <td class="r neg">+0.200</td>
+          <td class="r">0.250</td>
+          <td class="r">0.650</td>
+          <td class="r">12</td>
+        </tr>
+        <tr>
+          <td class="player">Joc Pederson</td>
+          <td class="team">TEX</td>
+          <td class="r " style="color:var(--cyan)">0.100</td>
+          <td class="r pos">-0.200</td>
+          <td class="r">0.120</td>
+          <td class="r">0.487</td>
+          <td class="r">25</td>
+        </tr>
+        <tr>
+          <td class="player">Jordan Beck</td>
+          <td class="team">COL</td>
+          <td class="r " style="color:var(--cyan)">0.105</td>
+          <td class="r pos">-0.195</td>
+          <td class="r">0.080</td>
+          <td class="r">0.268</td>
+          <td class="r">25</td>
+        </tr>
+        <tr>
+          <td class="player">Ke&#39;Bryan Hayes</td>
+          <td class="team">CIN</td>
+          <td class="r " style="color:var(--cyan)">0.107</td>
+          <td class="r pos">-0.193</td>
+          <td class="r">0.097</td>
+          <td class="r">0.249</td>
+          <td class="r">31</td>
+        </tr>
+        <tr>
+          <td class="player">Taylor Ward</td>
+          <td class="team">BAL</td>
+          <td class="r neg" >0.486</td>
+          <td class="r neg">+0.186</td>
+          <td class="r">0.383</td>
+          <td class="r">1.038</td>
+          <td class="r">47</td>
+        </tr>
+        <tr>
+          <td class="player">Yoán Moncada</td>
+          <td class="team">LAA</td>
+          <td class="r " style="color:var(--cyan)">0.118</td>
+          <td class="r pos">-0.182</td>
+          <td class="r">0.083</td>
+          <td class="r">0.434</td>
+          <td class="r">36</td>
+        </tr>
+        <tr>
+          <td class="player">Josh Lowe</td>
+          <td class="team">LAA</td>
+          <td class="r " style="color:var(--cyan)">0.118</td>
+          <td class="r pos">-0.182</td>
+          <td class="r">0.091</td>
+          <td class="r">0.423</td>
+          <td class="r">33</td>
+        </tr>
+        <tr>
+          <td class="player">Alejandro Kirk</td>
+          <td class="team">TOR</td>
+          <td class="r " style="color:var(--cyan)">0.118</td>
+          <td class="r pos">-0.182</td>
+          <td class="r">0.150</td>
+          <td class="r">0.577</td>
+          <td class="r">20</td>
+        </tr>
+        <tr>
+          <td class="player">Ildemaro Vargas</td>
+          <td class="team">AZ</td>
+          <td class="r neg" >0.476</td>
+          <td class="r neg">+0.176</td>
+          <td class="r">0.458</td>
+          <td class="r">1.250</td>
+          <td class="r">24</td>
+        </tr>
+        <tr>
+          <td class="player">Carlos Santana</td>
+          <td class="team">AZ</td>
+          <td class="r " style="color:var(--cyan)">0.125</td>
+          <td class="r pos">-0.175</td>
+          <td class="r">0.083</td>
+          <td class="r">0.279</td>
+          <td class="r">24</td>
+        </tr>
+        <tr>
+          <td class="player">James McCann</td>
+          <td class="team">AZ</td>
+          <td class="r " style="color:var(--cyan)">0.125</td>
+          <td class="r pos">-0.175</td>
+          <td class="r">0.071</td>
+          <td class="r">0.276</td>
+          <td class="r">14</td>
+        </tr>
+        <tr>
+          <td class="player">Reese McGuire</td>
+          <td class="team">CWS</td>
+          <td class="r " style="color:var(--cyan)">0.125</td>
+          <td class="r pos">-0.175</td>
+          <td class="r">0.077</td>
+          <td class="r">0.220</td>
+          <td class="r">13</td>
+        </tr>
+        <tr>
+          <td class="player">Josh Naylor</td>
+          <td class="team">SEA</td>
+          <td class="r " style="color:var(--cyan)">0.125</td>
+          <td class="r pos">-0.175</td>
+          <td class="r">0.104</td>
+          <td class="r">0.277</td>
+          <td class="r">48</td>
+        </tr>
+        <tr>
+          <td class="player">Nathan Lukes</td>
+          <td class="team">TOR</td>
+          <td class="r " style="color:var(--cyan)">0.125</td>
+          <td class="r pos">-0.175</td>
+          <td class="r">0.105</td>
+          <td class="r">0.248</td>
+          <td class="r">19</td>
+        </tr>
+        <tr>
+          <td class="player">Carson Benge</td>
+          <td class="team">NYM</td>
+          <td class="r " style="color:var(--cyan)">0.125</td>
+          <td class="r pos">-0.175</td>
+          <td class="r">0.108</td>
+          <td class="r">0.403</td>
+          <td class="r">37</td>
+        </tr>
+        <tr>
+          <td class="player">Salvador Perez</td>
+          <td class="team">KC</td>
+          <td class="r " style="color:var(--cyan)">0.128</td>
+          <td class="r pos">-0.172</td>
+          <td class="r">0.146</td>
+          <td class="r">0.539</td>
+          <td class="r">48</td>
+        </tr>
+        <tr>
+          <td class="player">Wilyer Abreu</td>
+          <td class="team">BOS</td>
+          <td class="r neg" >0.469</td>
+          <td class="r neg">+0.169</td>
+          <td class="r">0.383</td>
+          <td class="r">1.110</td>
+          <td class="r">47</td>
+        </tr>
+        <tr>
+          <td class="player">Rhys Hoskins</td>
+          <td class="team">CLE</td>
+          <td class="r neg" >0.467</td>
+          <td class="r neg">+0.167</td>
+          <td class="r">0.259</td>
+          <td class="r">0.838</td>
+          <td class="r">27</td>
+        </tr>
+        <tr>
+          <td class="player">Colt Keith</td>
+          <td class="team">DET</td>
+          <td class="r neg" >0.467</td>
+          <td class="r neg">+0.167</td>
+          <td class="r">0.350</td>
+          <td class="r">0.895</td>
+          <td class="r">40</td>
+        </tr>
+        <tr>
+          <td class="player">Ryan McMahon</td>
+          <td class="team">NYY</td>
+          <td class="r " style="color:var(--cyan)">0.133</td>
+          <td class="r pos">-0.167</td>
+          <td class="r">0.069</td>
+          <td class="r">0.319</td>
+          <td class="r">29</td>
+        </tr>
+        <tr>
+          <td class="player">Harrison Bader</td>
+          <td class="team">SF</td>
+          <td class="r " style="color:var(--cyan)">0.133</td>
+          <td class="r pos">-0.167</td>
+          <td class="r">0.114</td>
+          <td class="r">0.354</td>
+          <td class="r">44</td>
+        </tr>
+        <tr>
+          <td class="player">Javier Sanoja</td>
+          <td class="team">MIA</td>
+          <td class="r neg" >0.464</td>
+          <td class="r neg">+0.164</td>
+          <td class="r">0.406</td>
+          <td class="r">0.924</td>
+          <td class="r">32</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+</div>
+
+<div id="ballparks" class="section">
+
+  <div class="card">
+    <div class="card-title">Park Factors <span class="badge">Run Environment</span></div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Venue</th>
+          <th>Team</th>
+          <th class="r" data-tip="Ballpark elevation in feet. Higher altitude = thinner air = more home runs and runs scored.">Elev</th>
+          <th class="c" data-tip="Roof type — Open, Retractable, or Dome. Covered parks reduce weather variance.">Roof</th>
+          <th class="r" data-tip="Average total runs per game at this venue (both teams combined). Color-coded vs. league average — red = hitter-friendly, green = pitcher-friendly.">Avg R</th>
+          <th class="r" data-tip="Average home runs per game at this venue (both teams combined)">Avg HR</th>
+          <th class="r" data-tip="Games played at this venue in the sample">GP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sutter Health Park</td>
+          <td class="team">OAK</td>
+          <td class="r">24ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-5">16.0</td>
+          <td class="r">3.0</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td>Nationals Park</td>
+          <td class="team">WSH</td>
+          <td class="r">35ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-5">13.83</td>
+          <td class="r">3.83</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Minute Maid Park</td>
+          <td class="team">HOU</td>
+          <td class="r">45ft</td>
+          <td class="c">Retractable</td>
+          <td class="r heat-5">11.0</td>
+          <td class="r">3.0</td>
+          <td class="r">7</td>
+        </tr>
+        <tr>
+          <td>American Family Field</td>
+          <td class="team">MIL</td>
+          <td class="r">597ft</td>
+          <td class="c">Retractable</td>
+          <td class="r heat-5">10.33</td>
+          <td class="r">3.17</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Citizens Bank Park</td>
+          <td class="team">PHI</td>
+          <td class="r">20ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-4">9.83</td>
+          <td class="r">2.17</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Comerica Park</td>
+          <td class="team">DET</td>
+          <td class="r">600ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-4">9.67</td>
+          <td class="r">2.33</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td>Tropicana Field</td>
+          <td class="team">TB</td>
+          <td class="r">15ft</td>
+          <td class="c">Dome</td>
+          <td class="r heat-4">9.67</td>
+          <td class="r">2.33</td>
+          <td class="r">3</td>
+        </tr>
+        <tr>
+          <td>Busch Stadium</td>
+          <td class="team">STL</td>
+          <td class="r">460ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-4">9.5</td>
+          <td class="r">1.5</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Rogers Centre</td>
+          <td class="team">TOR</td>
+          <td class="r">270ft</td>
+          <td class="c">Retractable</td>
+          <td class="r heat-4">9.22</td>
+          <td class="r">2.22</td>
+          <td class="r">9</td>
+        </tr>
+        <tr>
+          <td>Citi Field</td>
+          <td class="team">NYM</td>
+          <td class="r">10ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-4">9.17</td>
+          <td class="r">1.33</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Kauffman Stadium</td>
+          <td class="team">KC</td>
+          <td class="r">856ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-4">9.14</td>
+          <td class="r">1.86</td>
+          <td class="r">7</td>
+        </tr>
+        <tr>
+          <td>Wrigley Field</td>
+          <td class="team">CHC</td>
+          <td class="r">595ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-3">9.0</td>
+          <td class="r">2.17</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Chase Field</td>
+          <td class="team">AZ</td>
+          <td class="r">1086ft</td>
+          <td class="c">Retractable</td>
+          <td class="r heat-3">9.0</td>
+          <td class="r">1.86</td>
+          <td class="r">7</td>
+        </tr>
+        <tr>
+          <td>Yankee Stadium</td>
+          <td class="team">NYY</td>
+          <td class="r">55ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-3">8.83</td>
+          <td class="r">1.33</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Oriole Park at Camden Yards</td>
+          <td class="team">BAL</td>
+          <td class="r">33ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-3">8.83</td>
+          <td class="r">1.83</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Target Field</td>
+          <td class="team">MIN</td>
+          <td class="r">597ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-3">8.71</td>
+          <td class="r">0.86</td>
+          <td class="r">7</td>
+        </tr>
+        <tr>
+          <td>Coors Field</td>
+          <td class="team">COL</td>
+          <td class="r">5190ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-3">8.5</td>
+          <td class="r">2.17</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Fenway Park</td>
+          <td class="team">BOS</td>
+          <td class="r">21ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-3">8.33</td>
+          <td class="r">0.83</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>loanDepot park</td>
+          <td class="team">MIA</td>
+          <td class="r">10ft</td>
+          <td class="c">Retractable</td>
+          <td class="r heat-2">8.2</td>
+          <td class="r">1.5</td>
+          <td class="r">10</td>
+        </tr>
+        <tr>
+          <td>Petco Park</td>
+          <td class="team">SD</td>
+          <td class="r">23ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-2">7.86</td>
+          <td class="r">1.29</td>
+          <td class="r">7</td>
+        </tr>
+        <tr>
+          <td>PNC Park</td>
+          <td class="team">PIT</td>
+          <td class="r">780ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-2">7.83</td>
+          <td class="r">0.83</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Angel Stadium</td>
+          <td class="team">LAA</td>
+          <td class="r">151ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-2">7.5</td>
+          <td class="r">1.67</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Oracle Park</td>
+          <td class="team">SF</td>
+          <td class="r">0ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-1">7.3</td>
+          <td class="r">1.0</td>
+          <td class="r">10</td>
+        </tr>
+        <tr>
+          <td>T-Mobile Park</td>
+          <td class="team">SEA</td>
+          <td class="r">10ft</td>
+          <td class="c">Retractable</td>
+          <td class="r heat-1">7.29</td>
+          <td class="r">2.0</td>
+          <td class="r">7</td>
+        </tr>
+        <tr>
+          <td>Great American Ball Park</td>
+          <td class="team">CIN</td>
+          <td class="r">535ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-1">7.17</td>
+          <td class="r">2.5</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Dodger Stadium</td>
+          <td class="team">LAD</td>
+          <td class="r">515ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-1">6.67</td>
+          <td class="r">1.83</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Progressive Field</td>
+          <td class="team">CLE</td>
+          <td class="r">653ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-1">6.33</td>
+          <td class="r">2.0</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Guaranteed Rate Field</td>
+          <td class="team">CWS</td>
+          <td class="r">595ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-1">6.33</td>
+          <td class="r">1.0</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Truist Park</td>
+          <td class="team">ATL</td>
+          <td class="r">1001ft</td>
+          <td class="c">Open</td>
+          <td class="r heat-1">6.0</td>
+          <td class="r">1.67</td>
+          <td class="r">6</td>
+        </tr>
+        <tr>
+          <td>Globe Life Field</td>
+          <td class="team">TEX</td>
+          <td class="r">545ft</td>
+          <td class="c">Retractable</td>
+          <td class="r heat-1">4.0</td>
+          <td class="r">1.17</td>
+          <td class="r">6</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Teams to Back</div>
+      <div class="grid-2">
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-BACK">hot_team</span>
+    <span>BAL are on a hot streak</span>
+  </div>
+  <div class="signal-body">Won their last 3+ games.</div>
+</div>
+
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-BACK">hot_team</span>
+    <span>TEX are on a hot streak</span>
+  </div>
+  <div class="signal-body">Won their last 3+ games.</div>
+</div>
+
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-BACK">hot_team</span>
+    <span>MIN are on a hot streak</span>
+  </div>
+  <div class="signal-body">Won their last 3+ games.</div>
+</div>
+
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-BACK">best_offense</span>
+    <span>LAD lead the league in scoring</span>
+  </div>
+  <div class="signal-body">Averaging 6.25 runs per game.</div>
+</div>
+
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-BACK">best_pitching</span>
+    <span>NYY have the best pitching staff</span>
+  </div>
+  <div class="signal-body">Allowing just 2.42 runs per game.</div>
+</div>
+
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Teams to Fade</div>
+      <div class="grid-2">
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-FADE">cold_team</span>
+    <span>DET are ice cold</span>
+  </div>
+  <div class="signal-body">Lost their last 3+ games.</div>
+</div>
+
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-FADE">cold_team</span>
+    <span>HOU are ice cold</span>
+  </div>
+  <div class="signal-body">Lost their last 3+ games.</div>
+</div>
+
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-FADE">cold_team</span>
+    <span>KC are ice cold</span>
+  </div>
+  <div class="signal-body">Lost their last 3+ games.</div>
+</div>
+
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-FADE">cold_team</span>
+    <span>SEA are ice cold</span>
+  </div>
+  <div class="signal-body">Lost their last 3+ games.</div>
+</div>
+
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-FADE">worst_offense</span>
+    <span>CIN have the weakest offense</span>
+  </div>
+  <div class="signal-body">Averaging 3.0 runs per game.</div>
+</div>
+
+      <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-FADE">worst_pitching</span>
+    <span>WSH have the worst pitching staff</span>
+  </div>
+  <div class="signal-body">Allowing 6.5 runs per game.</div>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Regression & Trend Watch</div>
+    <div class="grid-3">
+    <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-REGRESS">regression_down</span>
+    <span>TOR may be due for regression</span>
+  </div>
+  <div class="signal-body">Actual W% (0.417) is +0.104 above Pythagorean W% (0.313). Run diff of -22 suggests they have been lucky.</div>
+</div>
+
+    <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-REGRESS">regression_up</span>
+    <span>DET may be underperforming their true talent</span>
+  </div>
+  <div class="signal-body">Actual W% (0.308) is -0.167 below Pythagorean W% (0.475). Run diff of -3 suggests better days ahead.</div>
+</div>
+
+    <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-REGRESS">regression_up</span>
+    <span>SEA may be underperforming their true talent</span>
+  </div>
+  <div class="signal-body">Actual W% (0.308) is -0.170 below Pythagorean W% (0.478). Run diff of -2 suggests better days ahead.</div>
+</div>
+
+    <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-REGRESS">regression_up</span>
+    <span>ATL may be underperforming their true talent</span>
+  </div>
+  <div class="signal-body">Actual W% (0.615) is -0.165 below Pythagorean W% (0.780). Run diff of +32 suggests better days ahead.</div>
+</div>
+
+    <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-REGRESS">regression_down</span>
+    <span>PHI may be due for regression</span>
+  </div>
+  <div class="signal-body">Actual W% (0.500) is +0.136 above Pythagorean W% (0.364). Run diff of -15 suggests they have been lucky.</div>
+</div>
+
+    <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-REGRESS">regression_up</span>
+    <span>WSH may be underperforming their true talent</span>
+  </div>
+  <div class="signal-body">Actual W% (0.333) is -0.124 below Pythagorean W% (0.457). Run diff of -7 suggests better days ahead.</div>
+</div>
+
+    <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-REGRESS">regression_down</span>
+    <span>CIN may be due for regression</span>
+  </div>
+  <div class="signal-body">Actual W% (0.615) is +0.209 above Pythagorean W% (0.406). Run diff of -9 suggests they have been lucky.</div>
+</div>
+
+    <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-REGRESS">regression_down</span>
+    <span>STL may be due for regression</span>
+  </div>
+  <div class="signal-body">Actual W% (0.583) is +0.106 above Pythagorean W% (0.477). Run diff of -3 suggests they have been lucky.</div>
+</div>
+
+    <div class="signal-card">
+  <div class="signal-title">
+    <span class="signal-tag tag-REGRESS">regression_up</span>
+    <span>CHC may be underperforming their true talent</span>
+  </div>
+  <div class="signal-body">Actual W% (0.500) is -0.109 below Pythagorean W% (0.609). Run diff of +12 suggests better days ahead.</div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+
+<div id="yesterday" class="section">
+
+  <div class="card">
+    <div class="card-title">Yesterday's Results</div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Away</th>
+          <th class="r" data-tip="Runs scored by the away team">R</th>
+          <th class="c"></th>
+          <th>Home</th>
+          <th class="r" data-tip="Runs scored by the home team">R</th>
+          <th class="c" data-tip="Winning team">W</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="team">COL</td>
+          <td class="r ">3</td>
+          <td class="c" style="color:var(--text-dim)">@</td>
+          <td class="team">SD</td>
+          <td class="r pos">7</td>
+          <td class="c w">SD</td>
+        </tr>
+        <tr>
+          <td class="team">OAK</td>
+          <td class="r pos">1</td>
+          <td class="c" style="color:var(--text-dim)">@</td>
+          <td class="team">NYY</td>
+          <td class="r ">0</td>
+          <td class="c w">OAK</td>
+        </tr>
+        <tr>
+          <td class="team">AZ</td>
+          <td class="r pos">7</td>
+          <td class="c" style="color:var(--text-dim)">@</td>
+          <td class="team">NYM</td>
+          <td class="r ">1</td>
+          <td class="c w">AZ</td>
+        </tr>
+        <tr>
+          <td class="team">DET</td>
+          <td class="r ">1</td>
+          <td class="c" style="color:var(--text-dim)">@</td>
+          <td class="team">MIN</td>
+          <td class="r pos">3</td>
+          <td class="c w">MIN</td>
+        </tr>
+        <tr>
+          <td class="team">CIN</td>
+          <td class="r ">1</td>
+          <td class="c" style="color:var(--text-dim)">@</td>
+          <td class="team">MIA</td>
+          <td class="r pos">8</td>
+          <td class="c w">MIA</td>
+        </tr>
+        <tr>
+          <td class="team">CWS</td>
+          <td class="r pos">2</td>
+          <td class="c" style="color:var(--text-dim)">@</td>
+          <td class="team">KC</td>
+          <td class="r ">0</td>
+          <td class="c w">CWS</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Starting Pitcher Performances</div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Matchup</th>
+          <th>Pitcher</th>
+          <th>Team</th>
+          <th class="r" data-tip="Innings pitched">IP</th>
+          <th class="r" data-tip="Hits allowed">H</th>
+          <th class="r" data-tip="Earned runs allowed">ER</th>
+          <th class="r" data-tip="Strikeouts">K</th>
+          <th class="r" data-tip="Walks issued">BB</th>
+          <th class="c" data-tip="Decision — W (win), L (loss), or ND (no decision)">Dec</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="">
+          <td>OAK @ NYY</td>
+          <td class="player">Ryan Weathers</td>
+          <td class="team">NYY</td>
+          <td class="r">8.0</td>
+          <td class="r">7</td>
+          <td class="r">1</td>
+          <td class="r">7</td>
+          <td class="r">0</td>
+          <td class="c l">L</td>
+        </tr>
+        <tr class="hot">
+          <td>OAK @ NYY</td>
+          <td class="player">Jeffrey Springs</td>
+          <td class="team">OAK</td>
+          <td class="r">7.0</td>
+          <td class="r">1</td>
+          <td class="r">0</td>
+          <td class="r">6</td>
+          <td class="r">2</td>
+          <td class="c w">W</td>
+        </tr>
+        <tr class="">
+          <td>AZ @ NYM</td>
+          <td class="player">Nolan McLean</td>
+          <td class="team">NYM</td>
+          <td class="r">6.1</td>
+          <td class="r">3</td>
+          <td class="r">2</td>
+          <td class="r">8</td>
+          <td class="r">2</td>
+          <td class="c l">L</td>
+        </tr>
+        <tr class="">
+          <td>CWS @ KC</td>
+          <td class="player">Seth Lugo</td>
+          <td class="team">KC</td>
+          <td class="r">6.1</td>
+          <td class="r">4</td>
+          <td class="r">1</td>
+          <td class="r">4</td>
+          <td class="r">4</td>
+          <td class="c l">L</td>
+        </tr>
+        <tr class="hot">
+          <td>DET @ MIN</td>
+          <td class="player">Mick Abel</td>
+          <td class="team">MIN</td>
+          <td class="r">6.0</td>
+          <td class="r">4</td>
+          <td class="r">0</td>
+          <td class="r">6</td>
+          <td class="r">3</td>
+          <td class="c ">ND</td>
+        </tr>
+        <tr class="">
+          <td>AZ @ NYM</td>
+          <td class="player">Eduardo Rodriguez</td>
+          <td class="team">AZ</td>
+          <td class="r">6.0</td>
+          <td class="r">5</td>
+          <td class="r">1</td>
+          <td class="r">3</td>
+          <td class="r">2</td>
+          <td class="c w">W</td>
+        </tr>
+        <tr class="">
+          <td>COL @ SD</td>
+          <td class="player">Randy Vásquez</td>
+          <td class="team">SD</td>
+          <td class="r">5.2</td>
+          <td class="r">7</td>
+          <td class="r">1</td>
+          <td class="r">8</td>
+          <td class="r">0</td>
+          <td class="c ">ND</td>
+        </tr>
+        <tr class="">
+          <td>DET @ MIN</td>
+          <td class="player">Jack Flaherty</td>
+          <td class="team">DET</td>
+          <td class="r">5.2</td>
+          <td class="r">5</td>
+          <td class="r">1</td>
+          <td class="r">6</td>
+          <td class="r">3</td>
+          <td class="c ">ND</td>
+        </tr>
+        <tr class="">
+          <td>CWS @ KC</td>
+          <td class="player">Anthony Kay</td>
+          <td class="team">CWS</td>
+          <td class="r">5.2</td>
+          <td class="r">3</td>
+          <td class="r">0</td>
+          <td class="r">6</td>
+          <td class="r">2</td>
+          <td class="c w">W</td>
+        </tr>
+        <tr class="">
+          <td>CIN @ MIA</td>
+          <td class="player">Rhett Lowder</td>
+          <td class="team">CIN</td>
+          <td class="r">5.1</td>
+          <td class="r">8</td>
+          <td class="r">4</td>
+          <td class="r">2</td>
+          <td class="r">2</td>
+          <td class="c l">L</td>
+        </tr>
+        <tr class="">
+          <td>CIN @ MIA</td>
+          <td class="player">Max Meyer</td>
+          <td class="team">MIA</td>
+          <td class="r">5.0</td>
+          <td class="r">4</td>
+          <td class="r">1</td>
+          <td class="r">4</td>
+          <td class="r">3</td>
+          <td class="c w">W</td>
+        </tr>
+        <tr class="">
+          <td>COL @ SD</td>
+          <td class="player">Jimmy Herget</td>
+          <td class="team">COL</td>
+          <td class="r">1.0</td>
+          <td class="r">0</td>
+          <td class="r">0</td>
+          <td class="r">0</td>
+          <td class="r">0</td>
+          <td class="c ">ND</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+</div>
+
+
+  <div class="footer">
+    The Stat Drop is an analytics and entertainment product. All data is sourced from publicly available MLB statistics.
+    Past performance does not guarantee future results. Not affiliated with Major League Baseball.
+  </div>
+</div>
+
+<script>
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.tab-nav button').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Tooltip system
+(function() {
+  var box = document.createElement('div');
+  box.className = 'tip-box';
+  document.body.appendChild(box);
+  var active = false;
+  document.addEventListener('mouseover', function(e) {
+    var el = e.target.closest('[data-tip]');
+    if (el) { box.textContent = el.getAttribute('data-tip'); box.style.display = 'block'; active = true; }
+  });
+  document.addEventListener('mouseout', function(e) {
+    var el = e.target.closest('[data-tip]');
+    if (el) { box.style.display = 'none'; active = false; }
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!active) return;
+    var bw = box.offsetWidth, bh = box.offsetHeight;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var top = e.clientY - bh - 10;
+    var left = e.clientX - bw / 2;
+    if (top < 8) top = e.clientY + 18;
+    if (left < 8) left = 8;
+    if (left + bw > vw - 8) left = vw - bw - 8;
+    box.style.top = top + 'px';
+    box.style.left = left + 'px';
+  });
+})();
+</script>
+</body>
+</html>
